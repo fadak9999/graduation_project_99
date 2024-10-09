@@ -1,294 +1,4 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get_core/src/get_main.dart';
-// import 'package:get/get_navigation/get_navigation.dart';
-// import 'package:graduation_project_99/Firebase__/login.dart';
-// import 'package:graduation_project_99/pages/home.dart';
 
-
-// // ignore: camel_case_types
-// class signup extends StatefulWidget {
-//   const signup({super.key});
-
-//   @override
-//   State<signup> createState() => _signupState();
-// }
-
-// // ignore: camel_case_types
-// class _signupState extends State<signup> {
-//   ///
-//   bool _obscureText = true;
-//   final _name = TextEditingController();
-//   final _email = TextEditingController();
-//   final _password = TextEditingController();
-//   // ignore: non_constant_identifier_names
-//   final _confirm_password = TextEditingController();
-//   Future sinIn() async {
-//     if (check_enter_user()) {
-//       if (passwordConfirn()) {
-//         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-//             email: _email.text.trim(), password: _password.text.trim());
-//         Get.off(const Home());
-//       } else {
-//         return showModalBottomSheet(
-//             context: context,
-//             builder: (context) {
-//               return const SizedBox(
-//                 height: 300,
-//                 width: double.infinity,
-//                 child: Center(
-//                   child: Text(
-//                     "يوجد اختلاف الرمز السري",
-//                   ),
-//                 ),
-//               );
-//             });
-//       }
-//     } else {
-//       return showModalBottomSheet(
-//           context: context,
-//           builder: (context) {
-//             return const SizedBox(
-//               height: 300,
-//               width: double.infinity,
-//               child: Center(
-//                 child: Text(
-//                   "لم تقم باضافه ألبريد ألالكتروني او كلمة المرور حاول مجددا ",
-//                 ),
-//               ),
-//             );
-//           });
-//     }
-//   }
-
-//   bool passwordConfirn() {
-//     if (_password.text.trim() == _confirm_password.text.trim()) {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   }
-
-//   // ignore: non_constant_identifier_names
-//   bool check_enter_user() {
-//     if (_email.text.trim() != "" &&
-//         _password.text.trim() != "" &&
-//         _confirm_password.text.trim() != "") {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   }
-
-//   @override
-//   void dispose() {
-//     super.dispose();
-//     _email.dispose();
-//     _password.dispose();
-//     _confirm_password.dispose();
-//   }
-
-//   // ignore: non_constant_identifier_names
-//   void go_to_login() {
-//     Get.off(const login());
-//   }
-
-//   //////////////////////
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: SafeArea(
-//         child: Center(
-//           child: ListView(
-//             children: [
-//               //img
-//             //  Image.asset("assets/signup.avif",
-//             //    height: 250,
-//             //   ),
-//               const SizedBox(
-//                 height: 10,
-//               ),
-//               //title
-//               const Center(
-//                 child: Text(
-//                   "Sign in",
-//                 ),
-//               ),
-//               //subtitle
-
-//               const SizedBox(
-//                 height: 20,
-//               ),
-//               //name
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 25),
-//                 child: Container(
-//                   height: 65,
-//                   width: 105,
-//                   decoration: BoxDecoration(
-//                       color: Colors.grey[200],
-//                       borderRadius: BorderRadius.circular(12)),
-//                   child: Padding(
-//                     padding: const EdgeInsets.symmetric(horizontal: 20),
-//                     child: TextField(
-//                       controller: _name,
-//                       decoration: const InputDecoration(
-//                           border: InputBorder.none, hintText: "name"),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-
-//               const SizedBox(
-//                 height: 20,
-//               ),
-//               //email textfild
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 25),
-//                 child: Container(
-//                   height: 65,
-//                   width: 105,
-//                   decoration: BoxDecoration(
-//                       color: Colors.grey[200],
-//                       borderRadius: BorderRadius.circular(12)),
-//                   child: Padding(
-//                     padding: const EdgeInsets.symmetric(horizontal: 20),
-//                     child: TextField(
-//                       controller: _email,
-//                       decoration: const InputDecoration(
-//                           border: InputBorder.none, hintText: "E-mail"),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 15,
-//               ),
-//               //password textfild
-
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 20),
-//                 child: Container(
-//                   decoration: BoxDecoration(
-//                       color: Colors.grey[200],
-//                       borderRadius: BorderRadius.circular(12)),
-//                   child: Padding(
-//                     padding: const EdgeInsets.symmetric(horizontal: 20),
-//                     child: TextField(
-//                       controller: _password,
-//                       obscureText: _obscureText,
-//                       decoration: InputDecoration(
-//                         labelText: 'Pssword',
-//                         border: InputBorder.none,
-//                         //  OutlineInputBorder(),
-//                         prefixIcon: const Icon(Icons.lock),
-//                         suffixIcon: IconButton(
-//                           icon: Icon(
-//                             _obscureText
-//                                 ? Icons.visibility
-//                                 : Icons.visibility_off,
-//                           ),
-//                           onPressed: () {
-//                             setState(() {
-//                               _obscureText = !_obscureText;
-//                             });
-//                           },
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 15,
-//               ),
-//               // confirm password textfild
-
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 20),
-//                 child: Container(
-//                   decoration: BoxDecoration(
-//                       color: Colors.grey[200],
-//                       borderRadius: BorderRadius.circular(12)),
-//                   child: Padding(
-//                     padding: const EdgeInsets.symmetric(horizontal: 20),
-//                     child: TextField(
-//                       controller: _confirm_password,
-//                       obscureText: _obscureText,
-//                       decoration: InputDecoration(
-//                         labelText: 'confirm Pssword',
-//                         border: InputBorder.none,
-//                         //  OutlineInputBorder(),
-//                         prefixIcon: const Icon(Icons.lock),
-//                         suffixIcon: IconButton(
-//                           icon: Icon(
-//                             _obscureText
-//                                 ? Icons.visibility
-//                                 : Icons.visibility_off,
-//                           ),
-//                           onPressed: () {
-//                             setState(() {
-//                               _obscureText = !_obscureText;
-//                             });
-//                           },
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 40,
-//               ),
-//               // sign in botton
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 25),
-//                 child: InkWell(
-//                   onTap: sinIn,
-//                   child: Container(
-//                     padding: const EdgeInsets.all(16),
-//                     decoration: BoxDecoration(
-//                         color: Colors.deepPurple[600],
-//                         borderRadius: BorderRadius.circular(12)),
-//                     child: const Center(
-//                         child: Text(
-//                       "Sign in",
-//                     )),
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 15,
-//               ),
-//               // text  to sign up
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   const Text(
-//                     "I have an account",
-//                   ),
-//                   const SizedBox(
-//                     width: 10,
-//                   ),
-//                   InkWell(
-//                     onTap: go_to_login,
-//                     child: const Text(
-//                       "Go to login",
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               const SizedBox(
-//                 height: 50,
-//               )
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -311,6 +21,7 @@ class _signupState extends State<signup> {
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  // ignore: non_constant_identifier_names
   final _confirm_password = TextEditingController();
 
   Future sinIn() async {
@@ -325,6 +36,7 @@ class _signupState extends State<signup> {
         } on FirebaseAuthException catch (e) {
           if (e.code == 'email-already-in-use') {
             return showModalBottomSheet(
+                // ignore: use_build_context_synchronously
                 context: context,
                 builder: (context) {
                   return const SizedBox(
@@ -339,6 +51,7 @@ class _signupState extends State<signup> {
                 });
           } else {
             return showModalBottomSheet(
+                // ignore: use_build_context_synchronously
                 context: context,
                 builder: (context) {
                   return const SizedBox(
@@ -383,6 +96,7 @@ class _signupState extends State<signup> {
     return _password.text.trim() == _confirm_password.text.trim();
   }
 
+  // ignore: non_constant_identifier_names
   bool check_enter_user() {
     return _email.text.trim() != "" &&
         _password.text.trim() != "" &&
@@ -397,150 +111,233 @@ class _signupState extends State<signup> {
     _confirm_password.dispose();
   }
 
+  // ignore: non_constant_identifier_names
   void go_to_login() {
     Get.off(const login());
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+    //!______________________________________________________
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Center(
-          child: ListView(
-            children: [
-              const SizedBox(height: 10),
-              const Center(child: Text("Sign in")),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                  height: 65,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextField(
-                      controller: _name,
-                      decoration: const InputDecoration(
-                          border: InputBorder.none, hintText: "name"),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                  height: 65,
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextField(
-                      controller: _email,
-                      decoration: const InputDecoration(
-                          border: InputBorder.none, hintText: "E-mail"),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextField(
-                      controller: _password,
-                      obscureText: _obscureText,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        border: InputBorder.none,
-                        prefixIcon: const Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextField(
-                      controller: _confirm_password,
-                      obscureText: _obscureText,
-                      decoration: InputDecoration(
-                        labelText: 'Confirm Password',
-                        border: InputBorder.none,
-                        prefixIcon: const Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscureText
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _obscureText = !_obscureText;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: InkWell(
-                  onTap: sinIn,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 0, 3, 6),
+              Color.fromARGB(255, 0, 3, 6),
+              Color.fromARGB(255, 167, 3, 255),
+            ], // ألوان التدرج
+            begin: Alignment.topCenter, // بداية التدرج
+            end: Alignment.bottomCenter, // نهاية التدرج
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: ListView(
+              children: [
+                const SizedBox(height: 70),
+                const Center(
+                    child: Text("' Sign Up '",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 220, 171, 230),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold))),
+                const SizedBox(height: 100),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 45),
                   child: Container(
-                    padding: const EdgeInsets.all(16),
+                    height: 59,
                     decoration: BoxDecoration(
-                        color: Colors.deepPurple[600],
-                        borderRadius: BorderRadius.circular(12)),
-                    child: const Center(child: Text("Sign in")),
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 62, 2, 86),
+                          Color.fromARGB(255, 167, 3, 255),
+                        ],
+                        begin: Alignment.topRight, // اتجاه البداية
+                        end: Alignment.bottomLeft, // اتجاه النهاية
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TextField(
+                        controller: _name,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Name",
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("I have an account"),
-                  const SizedBox(width: 10),
-                  InkWell(
-                    onTap: go_to_login,
-                    child: const Text("Go to login"),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 45),
+                  child: Container(
+                    height: 55,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 62, 2, 86),
+                          Color.fromARGB(255, 167, 3, 255),
+                        ],
+                        begin: Alignment.topRight, // اتجاه البداية
+                        end: Alignment.bottomLeft, // اتجاه النهاية
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TextField(
+                        controller: _email,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "E-mail",
+                        ),
+                      ),
+                    ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 50),
-            ],
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 45),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 62, 2, 86),
+                          Color.fromARGB(255, 167, 3, 255),
+                        ],
+                        begin: Alignment.topRight, // اتجاه البداية
+                        end: Alignment.bottomLeft, // اتجاه النهاية
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TextField(
+                        controller: _password,
+                        obscureText: _obscureText,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: InputBorder.none,
+                          prefixIcon: const Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 45),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 62, 2, 86),
+                          Color.fromARGB(255, 167, 3, 255),
+                        ],
+                        begin: Alignment.topRight, // اتجاه البداية
+                        end: Alignment.bottomLeft, // اتجاه النهاية
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TextField(
+                        controller: _confirm_password,
+                        obscureText: _obscureText,
+                        decoration: InputDecoration(
+                          labelText: 'Confirm Password',
+                          border: InputBorder.none,
+                          prefixIcon: const Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 70),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: InkWell(
+                    onTap: sinIn,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 100, left: 100),
+                      child: Container(
+                        height: 60,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color.fromARGB(255, 62, 2, 86),
+                              Color.fromARGB(255, 62, 2, 86),
+                              Color.fromARGB(255, 126, 0, 180),
+                            ],
+                            begin: Alignment.topRight, // اتجاه البداية
+                            end: Alignment.bottomLeft, // اتجاه النهاية
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "I have an account",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    const SizedBox(width: 10),
+                    InkWell(
+                      onTap: go_to_login,
+                      child: const Text(
+                        "Go to login",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 247, 247, 247),
+                            fontSize: 15),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 50),
+              ],
+            ),
           ),
         ),
       ),
