@@ -105,18 +105,27 @@ class _loginState extends State<login> {
           // إضافة التدرج اللوني
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 124, 13, 193),
-              Color.fromARGB(255, 0, 0, 0),
-              Color.fromARGB(255, 0, 0, 0), // اللون الثاني
+              Color.fromARGB(255, 255, 255, 255),
+              Color.fromARGB(255, 171, 124, 205),
+              Color.fromARGB(255, 82, 0, 153),
             ],
-            begin: Alignment.topCenter, // اتجاه البداية
+            begin: Alignment.topCenter,
             end: Alignment.bottomCenter, // اتجاه النهاية
           ),
         ),
         child: ListView(
           children: [
+            const SizedBox(height: 80),
+            const Center(
+                child: Text(
+              "' nam app(^///^)'",
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Color.fromARGB(255, 82, 0, 153),
+                  fontWeight: FontWeight.bold),
+            )),
             const SizedBox(
-              height: 200,
+              height: 135,
             ),
             Center(
               child: Column(
@@ -132,6 +141,8 @@ class _loginState extends State<login> {
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     child: Container(
                       decoration: BoxDecoration(
+                          border: Border.all(
+                              color: const Color.fromARGB(255, 59, 0, 74)),
                           color: const Color.fromARGB(144, 238, 238, 238),
                           borderRadius: BorderRadius.circular(12)),
                       child: Padding(
@@ -156,6 +167,8 @@ class _loginState extends State<login> {
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     child: Container(
                       decoration: BoxDecoration(
+                          border: Border.all(
+                              color: const Color.fromARGB(255, 59, 0, 74)),
                           color: const Color.fromARGB(144, 238, 238, 238),
                           borderRadius: BorderRadius.circular(12)),
                       child: Padding(
@@ -200,11 +213,11 @@ class _loginState extends State<login> {
                         // إضافة التدرج اللوني
                         gradient: const LinearGradient(
                           colors: [
-                            Color.fromARGB(255, 43, 1, 70),
-                            Color.fromARGB(255, 180, 1, 245),
+                            Color.fromARGB(255, 199, 197, 197),
+                            Color.fromARGB(255, 82, 0, 153),
                           ],
-                          begin: Alignment.topRight, // اتجاه البداية
-                          end: Alignment.bottomLeft, // اتجاه النهاية
+                          begin: Alignment.topCenter, // اتجاه البداية
+                          end: Alignment.bottomCenter, // اتجاه النهاية
                         ),
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -251,9 +264,8 @@ class _loginState extends State<login> {
                     },
                     iconSize: 50,
                     color:
-                        const Color.fromARGB(255, 182, 51, 229), // لون الأيقونة
+                        const Color.fromARGB(255, 156, 63, 238), // لون الأيقونة
                   ),
-          
                 ],
               ),
             )

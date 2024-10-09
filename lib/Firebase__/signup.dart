@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -116,8 +115,6 @@ class _signupState extends State<signup> {
     Get.off(const login());
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     //!______________________________________________________
@@ -126,9 +123,8 @@ class _signupState extends State<signup> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 0, 3, 6),
-              Color.fromARGB(255, 0, 3, 6),
-              Color.fromARGB(255, 167, 3, 255),
+              Color.fromARGB(255, 255, 255, 255),
+              Color.fromARGB(255, 82, 0, 153),
             ], // ألوان التدرج
             begin: Alignment.topCenter, // بداية التدرج
             end: Alignment.bottomCenter, // نهاية التدرج
@@ -142,7 +138,7 @@ class _signupState extends State<signup> {
                 const Center(
                     child: Text("' Sign Up '",
                         style: TextStyle(
-                            color: Color.fromARGB(255, 220, 171, 230),
+                            color: Color.fromARGB(255, 120, 39, 163),
                             fontSize: 30,
                             fontWeight: FontWeight.bold))),
                 const SizedBox(height: 100),
@@ -151,14 +147,9 @@ class _signupState extends State<signup> {
                   child: Container(
                     height: 59,
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 62, 2, 86),
-                          Color.fromARGB(255, 167, 3, 255),
-                        ],
-                        begin: Alignment.topRight, // اتجاه البداية
-                        end: Alignment.bottomLeft, // اتجاه النهاية
-                      ),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 59, 0, 74)),
+                      color: const Color.fromARGB(166, 212, 210, 212),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
@@ -179,14 +170,9 @@ class _signupState extends State<signup> {
                   child: Container(
                     height: 55,
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 62, 2, 86),
-                          Color.fromARGB(255, 167, 3, 255),
-                        ],
-                        begin: Alignment.topRight, // اتجاه البداية
-                        end: Alignment.bottomLeft, // اتجاه النهاية
-                      ),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 59, 0, 74)),
+                      color: const Color.fromARGB(166, 212, 210, 212),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
@@ -206,14 +192,9 @@ class _signupState extends State<signup> {
                   padding: const EdgeInsets.symmetric(horizontal: 45),
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 62, 2, 86),
-                          Color.fromARGB(255, 167, 3, 255),
-                        ],
-                        begin: Alignment.topRight, // اتجاه البداية
-                        end: Alignment.bottomLeft, // اتجاه النهاية
-                      ),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 59, 0, 74)),
+                      color: const Color.fromARGB(166, 212, 210, 212),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
@@ -247,14 +228,9 @@ class _signupState extends State<signup> {
                   padding: const EdgeInsets.symmetric(horizontal: 45),
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 62, 2, 86),
-                          Color.fromARGB(255, 167, 3, 255),
-                        ],
-                        begin: Alignment.topRight, // اتجاه البداية
-                        end: Alignment.bottomLeft, // اتجاه النهاية
-                      ),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 59, 0, 74)),
+                      color: const Color.fromARGB(166, 212, 210, 212),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
@@ -296,19 +272,20 @@ class _signupState extends State<signup> {
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
                             colors: [
-                              Color.fromARGB(255, 62, 2, 86),
-                              Color.fromARGB(255, 62, 2, 86),
-                              Color.fromARGB(255, 126, 0, 180),
+                              Color.fromARGB(255, 176, 161, 187),
+                              Color.fromARGB(255, 82, 0, 153),
                             ],
-                            begin: Alignment.topRight, // اتجاه البداية
-                            end: Alignment.bottomLeft, // اتجاه النهاية
+                            begin: Alignment.topCenter, // اتجاه البداية
+                            end: Alignment.bottomCenter, // اتجاه النهاية
                           ),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Center(
                           child: Text(
                             "Sign Up",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 232, 221, 237),
+                                fontSize: 18),
                           ),
                         ),
                       ),
