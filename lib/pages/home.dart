@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project_99/pages/_Chatbot__/Chatbot.dart';
+import 'package:graduation_project_99/pages/__Speech%20to%20text/Speech_to_text.dart';
 import 'package:graduation_project_99/pages/__text_to_speech/text_to_speech.dart';
 
 class Home extends StatefulWidget {
@@ -160,7 +161,7 @@ class _HomeState extends State<Home> {
                       icon: const Icon(FontAwesomeIcons.fileAlt),
                       color: Colors.white,
                       onPressed: () {
-                        //    Get.to(speech_to_text());
+                        Get.to(speech_to_text());
                       },
                     ),
                   ),
@@ -171,7 +172,7 @@ class _HomeState extends State<Home> {
                       icon: const Icon(FontAwesomeIcons.microphone),
                       color: Colors.white,
                       onPressed: () {
-                        //  Get.to(speech_to_text());
+                      Get.to(speech_to_text());
                       },
                     ),
                   ),
@@ -230,7 +231,7 @@ class _HomeState extends State<Home> {
                       color: Colors.white,
                       onPressed: () {
                         //!
-             // Get.to(text_to_speech());
+          Get.to(TextToSpeech());
                         //?
                       },
                     ),
