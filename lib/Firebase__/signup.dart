@@ -327,6 +327,7 @@ import 'package:get/get.dart';
 import 'package:graduation_project_99/Firebase__/login.dart';
 import 'package:graduation_project_99/pages/home.dart';
 
+// ignore: camel_case_types
 class signup extends StatefulWidget {
   const signup({super.key});
 
@@ -334,6 +335,7 @@ class signup extends StatefulWidget {
   State<signup> createState() => _signupState();
 }
 
+// ignore: camel_case_types
 class _signupState extends State<signup> {
   bool _obscureText = true;
   final _name = TextEditingController();
@@ -473,7 +475,7 @@ class _signupState extends State<signup> {
                     const SizedBox(width: 10),
                     InkWell(
                       onTap: () {
-                        Get.off(login());
+                        Get.off(const login());
                       },
                       child: const Text(
                         "Go to login",

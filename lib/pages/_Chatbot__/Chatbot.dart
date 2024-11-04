@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, file_names
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:dash_chat_2/dash_chat_2.dart';
@@ -17,7 +17,6 @@ class Chatbot extends StatefulWidget {
 class _ChatbotState extends State<Chatbot> {
   final Gemini gemini = Gemini.instance;
   final ImagePicker _picker = ImagePicker();
-  Uint8List? _profileImage;
 
   List<ChatMessage> messages = [];
   ChatUser currentUser = ChatUser(id: "0", firstName: "User");
@@ -38,15 +37,10 @@ class _ChatbotState extends State<Chatbot> {
     String? imageString = prefs.getString('profile_image');
     if (imageString != null) {
       setState(() {
-        _profileImage = Uint8List.fromList(imageString.codeUnits);
       });
     }
   }
 
-  Future<void> _saveProfileImage(Uint8List imageBytes) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('profile_image', String.fromCharCodes(imageBytes));
-  }
 
   @override
   Widget build(BuildContext context) {

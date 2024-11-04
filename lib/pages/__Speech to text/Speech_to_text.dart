@@ -1,7 +1,10 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+// ignore: camel_case_types
 class speech_to_text extends StatefulWidget {
   const speech_to_text({super.key});
 
@@ -9,6 +12,7 @@ class speech_to_text extends StatefulWidget {
   State<speech_to_text> createState() => _speech_to_textState();
 }
 
+// ignore: camel_case_types
 class _speech_to_textState extends State<speech_to_text> {
   final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
@@ -33,11 +37,13 @@ class _speech_to_textState extends State<speech_to_text> {
   void _startListening() async {
     await _speechToText.listen(
       onResult: _onSpeechResult,
-      listenFor: Duration(minutes: 1),
-      pauseFor: Duration(seconds: 10),
+      listenFor: const Duration(minutes: 1),
+      pauseFor: const Duration(seconds: 10),
+      // ignore: deprecated_member_use
       partialResults: true,
       localeId: _selectedLanguage,
       onSoundLevelChange: (level) {
+        // ignore: avoid_print
         print("Sound level: $level");
       },
     );

@@ -300,6 +300,7 @@ class _loginState extends State<login> {
   Future signInWithGoogle() async {
     final googleUser = await GoogleSignIn().signIn();
     if (googleUser == null) {
+      // ignore: use_build_context_synchronously
       return ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('You have not specified an account')));
     }
@@ -339,6 +340,7 @@ class _loginState extends State<login> {
     }
   }
 
+  // ignore: non_constant_identifier_names
   bool check_enter_user() {
     if (_email.text.trim() != "" && _password.text.trim() != "") {
       return true;
@@ -354,6 +356,7 @@ class _loginState extends State<login> {
     _password.dispose();
   }
 
+  // ignore: non_constant_identifier_names
   void go_to_signUp() {
     Get.off(const signup());
   }

@@ -41,13 +41,16 @@ class _TextToSpeechState extends State<TextToSpeech> {
             _currentVoice = _voices.first;
             setVoice(_currentVoice!);
           } else {
+            // ignore: avoid_print
             print("No voices available");
           }
         });
       } else {
+        // ignore: avoid_print
         print("No voices returned");
       }
     } catch (e) {
+      // ignore: avoid_print
       print("Error getting voices: $e");
     }
   }
@@ -61,6 +64,7 @@ class _TextToSpeechState extends State<TextToSpeech> {
       try {
         await _flutterTts.speak(_textController.text);
       } catch (e) {
+        // ignore: avoid_print
         print("Error: $e");
       }
     }
