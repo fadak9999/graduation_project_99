@@ -326,6 +326,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project_99/Firebase__/login.dart';
 import 'package:graduation_project_99/pages/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: camel_case_types
 class signup extends StatefulWidget {
@@ -337,6 +338,20 @@ class signup extends StatefulWidget {
 
 // ignore: camel_case_types
 class _signupState extends State<signup> {
+
+
+  void setLocale(Locale value) async {
+    setState(() {
+    });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('locale', value.languageCode);
+  }
+
+
+
+
+
+
   bool _obscureText = true;
   final _name = TextEditingController();
   final _email = TextEditingController();
@@ -352,7 +367,7 @@ class _signupState extends State<signup> {
           email: _email.text.trim(),
           password: _password.text.trim(),
         );
-        Get.off(const Home());
+        Get.off(Home(setLocale: setLocale));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'email-already-in-use') {
           _showErrorMessage('البريد الإلكتروني مستخدم بالفعل');

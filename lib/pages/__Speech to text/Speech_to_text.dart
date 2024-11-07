@@ -67,7 +67,7 @@ class _speech_to_textState extends State<speech_to_text> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+     
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: const Text(

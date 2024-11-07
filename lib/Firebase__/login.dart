@@ -282,6 +282,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:graduation_project_99/Firebase__/signup.dart';
 import 'package:graduation_project_99/pages/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: camel_case_types
 class login extends StatefulWidget {
@@ -293,6 +294,22 @@ class login extends StatefulWidget {
 
 // ignore: camel_case_types
 class _loginState extends State<login> {
+
+
+
+
+  void setLocale(Locale value) async {
+    setState(() {
+    });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('locale', value.languageCode);
+  }
+
+
+
+
+
+
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool _obscureText = true;
@@ -317,7 +334,7 @@ class _loginState extends State<login> {
     if (check_enter_user()) {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _email.text.trim(), password: _password.text.trim());
-      Get.off(() => const Home());
+      Get.off(() => Home(setLocale: setLocale));
     } else {
       return showModalBottomSheet(
           context: context,

@@ -36,18 +36,15 @@ class _ChatbotState extends State<Chatbot> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? imageString = prefs.getString('profile_image');
     if (imageString != null) {
-      setState(() {
-      });
+      setState(() {});
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[850],
       appBar: AppBar(
-        backgroundColor: Colors.grey[800],
+        backgroundColor: const Color.fromARGB(255, 143, 31, 174),
         centerTitle: true,
         title: const Text(
           "Gemini Chat",
@@ -58,78 +55,6 @@ class _ChatbotState extends State<Chatbot> {
       body: _buildUI(),
     );
   }
-
-  // Drawer _buildDrawer() {
-  //   return Drawer(
-  //     backgroundColor: Colors.grey[850],
-  //     child: ListView(
-  //       padding: EdgeInsets.zero,
-  //       children: <Widget>[
-  //         DrawerHeader(
-  //           decoration: BoxDecoration(
-  //             color: Colors.grey[800],
-  //           ),
-  //           child: Column(
-  //             children: [
-  //               CircleAvatar(
-  //                 radius: 40,
-  //                 backgroundImage: _profileImage != null
-  //                     ? MemoryImage(_profileImage!)
-  //                     : const AssetImage('assets/default-avatar.jpg')
-  //                         as ImageProvider,
-  //               ),
-  //               const SizedBox(height: 10),
-  //               Text(
-  //                 currentUser.firstName ?? "User",
-  //                 style: const TextStyle(
-  //                   color: Colors.white,
-  //                   fontSize: 20,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //         ListTile(
-  //           leading: const Icon(Icons.camera_alt, color: Colors.white),
-  //           title: const Text(
-  //             'تغيير الصورة الشخصية',
-  //             style: TextStyle(
-  //               fontSize: 17,
-  //               fontWeight: FontWeight.bold,
-  //               color: Colors.white,
-  //             ),
-  //           ),
-  //           onTap: _pickProfileImage,
-  //         ),
-  //         ListTile(
-  //           leading: const Icon(Icons.settings, color: Colors.white),
-  //           title: const Text(
-  //             'الإعدادات',
-  //             style: TextStyle(
-  //               fontSize: 17,
-  //               fontWeight: FontWeight.bold,
-  //               color: Colors.white,
-  //             ),
-  //           ),
-  //           onTap: () {
-  //             // Add settings functionality here
-  //           },
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Future<void> _pickProfileImage() async {
-  //   final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
-  //   if (file != null) {
-  //     Uint8List imageBytes = await file.readAsBytes();
-  //     setState(() {
-  //       _profileImage = imageBytes;
-  //     });
-  //     _saveProfileImage(imageBytes);
-  //   }
-  // }
 
   Widget _buildUI() {
     return DashChat(
@@ -150,7 +75,7 @@ class _ChatbotState extends State<Chatbot> {
 
   void _showImageSourceActionSheet() {
     showModalBottomSheet(
-      backgroundColor: Colors.grey[850],
+      backgroundColor: const Color.fromARGB(255, 102, 75, 107),
       context: context,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -180,14 +105,14 @@ class _ChatbotState extends State<Chatbot> {
               ListTile(
                 leading: const Icon(
                   Icons.camera_alt,
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 212, 0, 255),
                 ),
                 title: const Text(
                   'الكاميرا',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 221, 0, 255),
                   ),
                 ),
                 onTap: () {
@@ -221,7 +146,7 @@ class _ChatbotState extends State<Chatbot> {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Color.fromARGB(255, 246, 243, 243),
             ),
           ),
           content: TextField(

@@ -63,7 +63,6 @@ class _image_to_textState extends State<image_to_text> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[50],
       appBar: AppBar(
         backgroundColor: Colors.purple[800],
         title: const Text(
