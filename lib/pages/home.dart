@@ -11,8 +11,6 @@ import 'package:graduation_project_99/pages/__Speech%20to%20text/Speech_to_text.
 import 'package:graduation_project_99/pages/__image_to_text/image_to_text.dart';
 import 'package:graduation_project_99/pages/__text_to_speech/text_to_speech.dart';
 
-
-
 class Home extends StatefulWidget {
   final Function(Locale) setLocale;
 
@@ -65,47 +63,159 @@ class _HomeState extends State<Home> {
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
+        //!=====================
+
+        // drawer: Drawer(
+        //   backgroundColor: const Color.fromARGB(255, 146, 135, 153),
+        //   child: Scaffold(
+        //     appBar: AppBar(),
+        //     body: Column(
+        //       children: [
+        //         Center(
+        //           child: SwitchListTile(
+        //             title: const Text('Change Language'),
+        //             value: _locale!.languageCode == 'ar',
+        //             onChanged: (bool value) {
+        //               _changeLanguage(value ? Locale('ar') : Locale('en'));
+        //             },
+        //           ),
+        //         ),
+        //         SizedBox(
+        //           height: 100,
+        //           child: AnimatedContainer(
+        //             duration: const Duration(milliseconds: 300),
+        //             color: lightDarkToggle
+        //                 ? Colors.blue[100]
+        //                 : Colors.blueGrey[800],
+        //             child: Center(
+        //               child: LightDarkSwitch(
+        //                 value: lightDarkToggle,
+        //                 onChanged: (value) {
+        //                   context.read<ModeProvider>().chaneMode();
+        //                 },
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+
         drawer: Drawer(
           backgroundColor: const Color.fromARGB(255, 146, 135, 153),
-          child: Scaffold(
-            appBar: AppBar(),
-            body: Column(
-              children: [
-                Center(
-                  child: SwitchListTile(
-                    title: const Text('Change Language'),
-                    value: _locale!.languageCode == 'ar',
-                    onChanged: (bool value) {
-                      _changeLanguage(value ? Locale('ar') : Locale('en'));
-                    },
-                  ),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              // User profile section
+
+              Container(
+                height: 200,
+                color: const Color.fromARGB(255, 84, 23, 134),
+              ),
+              // const UserAccountsDrawerHeader(
+              //   accountName: Text(
+              //     'User Name', // هنا ضع اسم المستخدم
+              //     style: TextStyle(
+              //         fontSize: 20, fontWeight: FontWeight.bold),
+              //   ),
+              //   accountEmail: Text(
+              //     'user@example.com', // هنا ضع بريد المستخدم
+              //     style: TextStyle(fontSize: 16),
+              //   ),
+              //   currentAccountPicture: CircleAvatar(
+              //     backgroundImage: NetworkImage(
+              //         'https://example.com/profile.jpg'), // هنا ضع رابط صورة المستخدم
+              //     backgroundColor: Colors.transparent,
+              //   ),
+              //   decoration: BoxDecoration(
+              //     color: Color.fromARGB(255, 94, 39, 153), // لون الخلفية
+              //   ),
+              // ),
+              // Language change switch
+              ListTile(
+                title: const Text('Change Language'),
+                trailing: Switch(
+                  value: _locale!.languageCode == 'ar',
+                  onChanged: (bool value) {
+                    _changeLanguage(value ? Locale('ar') : Locale('en'));
+                  },
                 ),
-                SizedBox(
-                  height: 100,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    color: lightDarkToggle
-                        ? Colors.blue[100]
-                        : Colors.blueGrey[800],
-                    child: Center(
-                      child: LightDarkSwitch(
-                        value: lightDarkToggle,
-                        onChanged: (value) {
-                          context.read<ModeProvider>().chaneMode();
-                        },
-                      ),
+              ),
+              const Divider(),
+              // Light/Dark Mode switch
+              //?========================================================================
+
+              SizedBox(
+                //   height: 80,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 100),
+                  color: lightDarkToggle
+                      ? const Color.fromARGB(0, 174, 174, 174)
+                      : const Color.fromARGB(0, 55, 71, 79),
+                  child: Center(
+                    child: LightDarkSwitch(
+                      value: lightDarkToggle,
+                      onChanged: (value) {
+                        context.read<ModeProvider>().chaneMode();
+                      },
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+
+              //?========================================================================
+              const Divider(),
+              // Other options
+              ListTile(
+                leading: const Icon(Icons.chat, color: Colors.black),
+                title: Text(S.of(context)?.chatbot ?? 'Chatbot'),
+                onTap: () => Get.to(const Chatbot()),
+              ),
+              ListTile(
+                leading: const Icon(Icons.image, color: Colors.black),
+                title: Text(S.of(context)?.text_to_imag ?? 'Image to Text'),
+                onTap: () => Get.to(const image_to_text()),
+              ),
+              ListTile(
+                leading: const Icon(Icons.mic, color: Colors.black),
+                title: Text(S.of(context)?.speech_to_text ?? 'Speech to Text'),
+                onTap: () => Get.to(const speech_to_text()),
+              ),
+              ListTile(
+                leading: const Icon(Icons.volume_up, color: Colors.black),
+                title: Text(S.of(context)?.text_to_speech ?? 'Text to Speech'),
+                onTap: () => Get.to(const TextToSpeech()),
+              ),
+              const Divider(),
+              // Additional options can be added here
+            ],
           ),
         ),
+
+        //!=============================================
+        // appBar: AppBar(
+        //   title: Text(S.of(context)!.titllehome), // استخدام نص افتراضي
+        //   backgroundColor: const Color.fromARGB(255, 94, 39, 153),
+        //   elevation: 0,
+        //   actionsIconTheme: Icon(Icons.abc),
+        // ),
+
         appBar: AppBar(
-        title: Text(S.of(context)!.titllehome), // استخدام نص افتراضي
+          title: Text(S.of(context)!.titllehome), // استخدام نص افتراضي
           backgroundColor: const Color.fromARGB(255, 94, 39, 153),
           elevation: 0,
+          actions: [
+            IconButton(
+              color: Colors.white,
+              icon: Icon(Icons.account_circle), // أيقونة البروفايل
+              onPressed: () {
+                // إضافة الفعل الذي سيحدث عند الضغط على الأيقونة (مثل فتح صفحة الملف الشخصي)
+              },
+            ),
+          ],
         ),
+
         body: _buildBody(),
       ),
     );
