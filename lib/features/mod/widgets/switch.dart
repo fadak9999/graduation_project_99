@@ -189,8 +189,8 @@ class _LightDarkSwitchState extends State<LightDarkSwitch> {
           "Dark",
           style: TextStyle(
             color: toggleState
-                ? const Color.fromARGB(255, 226, 226, 226)
-                : inactiveColor,
+                ? const Color.fromARGB(255, 0, 0, 0)
+                : const Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.bold,
           ),
         ),

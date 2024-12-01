@@ -1,25 +1,25 @@
+// ignore_for_file: library_private_types_in_public_api
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:graduation_project_99/Firebase__/Ayth.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:graduation_project_99/Firebase__/Auth.dart';
+import 'package:graduation_project_99/Firebase__/login.dart';
 import 'package:graduation_project_99/generated/l10n.dart';
 import 'package:graduation_project_99/features/mod/ModeProvider.dart';
 import 'package:graduation_project_99/features/mod/ModeTheme.dart';
-
+import 'package:graduation_project_99/pages/Chat_bot/API.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
-
-const String GEMINI_API_KEY = 'your_api_key_here';
+//const String GEMINI_API_KEY = 'AIzaSyDg-TmHL20iubkcKJ1L5SMB5fw6sjlgyrU';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Gemini.init(apiKey: GEMINI_API_KEY);
+  Gemini.init(apiKey: gemini_Api_Key);
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String localeCode = prefs.getString('locale') ?? 'en';
@@ -35,6 +35,7 @@ void main() async {
 class MyApp extends StatefulWidget {
   final Locale initialLocale;
 
+  // ignore: use_super_parameters
   const MyApp({Key? key, required this.initialLocale}) : super(key: key);
 
   @override
@@ -68,7 +69,8 @@ class _MyAppState extends State<MyApp> {
               ? ModeTheme.lightMode
               : ModeTheme.darkMode,
           locale: _locale,
-          fallbackLocale: Locale('en'), // تحديد لغة افتراضية في حال كانت locale غير معينة
+          fallbackLocale:
+              const Locale('en'), // تحديد لغة افتراضية في حال كانت locale غير معينة
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -76,7 +78,8 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          home: auth(setLocale: setLocale), // بدء التطبيق من auth وتمرير setLocale
+          home: auth(
+              setLocale: setLocale), // بدء التطبيق من auth وتمرير setLocale
           builder: (context, child) {
             return Directionality(
               textDirection: _locale.languageCode == 'ar'
@@ -85,6 +88,9 @@ class _MyAppState extends State<MyApp> {
               child: child!,
             );
           },
+            getPages: [
+    GetPage(name: '/login', page: () => login()),  // تأكد من أن LoginPage هي الصفحة الصحيحة
+  ],
         );
       },
     );

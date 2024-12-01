@@ -1,5 +1,3 @@
-// // ignore_for_file: file_names
-
 // import 'package:flutter/material.dart';
 // import 'package:speech_to_text/speech_to_text.dart';
 // import 'package:permission_handler/permission_handler.dart';
@@ -30,20 +28,32 @@
 //     var status = await Permission.microphone.request();
 //     if (status.isGranted) {
 //       _speechEnabled = await _speechToText.initialize(debugLogging: true);
+//       if (!_speechEnabled) {
+//         // إذا فشلت التهيئة، يمكن إظهار رسالة للمستخدم
+//         setState(() {
+//           _wordsSpoken = "Speech recognition not available.";
+//         });
+//       }
 //     }
 //     setState(() {});
 //   }
 
 //   void _startListening() async {
+//     if (!_speechEnabled) {
+//       // إذا لم تتم تهيئة مكتبة SpeechToText، لا يمكنك البدء في الاستماع
+//       setState(() {
+//         _wordsSpoken = "Speech recognition is not initialized properly.";
+//       });
+//       return;
+//     }
+    
 //     await _speechToText.listen(
 //       onResult: _onSpeechResult,
 //       listenFor: const Duration(minutes: 1),
 //       pauseFor: const Duration(seconds: 10),
-//       // ignore: deprecated_member_use
 //       partialResults: true,
 //       localeId: _selectedLanguage,
 //       onSoundLevelChange: (level) {
-//         // ignore: avoid_print
 //         print("Sound level: $level");
 //       },
 //     );
@@ -67,7 +77,6 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-     
 //       appBar: AppBar(
 //         backgroundColor: Colors.deepPurple,
 //         title: const Text(
@@ -112,7 +121,7 @@
 //               ? "Listening... Speak now."
 //               : _speechEnabled
 //                   ? "Tap the microphone to start listening..."
-//                   : "Speech recognition not available.",
+//                   : _wordsSpoken.isNotEmpty ? _wordsSpoken : "Speech recognition not available.",
 //           style: TextStyle(
 //             fontSize: 18.0,
 //             fontWeight: FontWeight.w400,
@@ -237,12 +246,6 @@
 
 
 
-
-
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -269,29 +272,38 @@ class _speech_to_textState extends State<speech_to_text> {
     initSpeech();
   }
 
-  void initSpeech() async {
+  Future<void> initSpeech() async {
     var status = await Permission.microphone.request();
+
     if (status.isGranted) {
+      // إذا تم منح الإذن، حاول تهيئة مكتبة SpeechToText
       _speechEnabled = await _speechToText.initialize(debugLogging: true);
       if (!_speechEnabled) {
-        // إذا فشلت التهيئة، يمكن إظهار رسالة للمستخدم
         setState(() {
-          _wordsSpoken = "Speech recognition not available.";
+          _wordsSpoken = "Speech recognition is not available on this device.";
         });
       }
+    } else if (status.isPermanentlyDenied) {
+      // إذا كان الإذن مرفوض دائمًا، توجيه المستخدم للإعدادات
+      _showPermissionDialog(
+          "تم حظر الوصول إلى الميكروفون. يرجى السماح بذلك من إعدادات التطبيق.");
+    } else if (status.isDenied) {
+      // إذا تم رفض الإذن، إظهار رسالة مناسبة
+      setState(() {
+        _wordsSpoken = "Access to microphone is required for speech recognition.";
+      });
     }
     setState(() {});
   }
 
-  void _startListening() async {
+  Future<void> _startListening() async {
     if (!_speechEnabled) {
-      // إذا لم تتم تهيئة مكتبة SpeechToText، لا يمكنك البدء في الاستماع
       setState(() {
         _wordsSpoken = "Speech recognition is not initialized properly.";
       });
       return;
     }
-    
+
     await _speechToText.listen(
       onResult: _onSpeechResult,
       listenFor: const Duration(minutes: 1),
@@ -307,16 +319,54 @@ class _speech_to_textState extends State<speech_to_text> {
     });
   }
 
-  void _stopListening() async {
+  Future<void> _stopListening() async {
     await _speechToText.stop();
     setState(() {});
   }
 
   void _onSpeechResult(result) {
     setState(() {
-      _wordsSpoken = "${result.recognizedWords}";
+      _wordsSpoken = result.recognizedWords;
       _confidenceLevel = result.confidence;
     });
+  }
+
+  void _showPermissionDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Permission Required',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          content: Text(
+            message,
+            style: const TextStyle(fontSize: 16),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                openAppSettings();
+              },
+              child: const Text(
+                'Open Settings',
+                style: TextStyle(color: Colors.blue),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -366,7 +416,9 @@ class _speech_to_textState extends State<speech_to_text> {
               ? "Listening... Speak now."
               : _speechEnabled
                   ? "Tap the microphone to start listening..."
-                  : _wordsSpoken.isNotEmpty ? _wordsSpoken : "Speech recognition not available.",
+                  : _wordsSpoken.isNotEmpty
+                      ? _wordsSpoken
+                      : "Speech recognition not available.",
           style: TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.w400,
