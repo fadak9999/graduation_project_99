@@ -112,7 +112,7 @@ class _AccountState extends State<Account> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(isRtl ? 'الإعدادات' : 'Settings'),
-          backgroundColor: const Color.fromARGB(255, 84, 23, 134),
+          backgroundColor: Color.fromARGB(255, 70, 16, 99),
           elevation: 0,
         ),
         body: ListView(
@@ -135,8 +135,9 @@ class _AccountState extends State<Account> {
                   begin: Alignment.topCenter, // بداية التدرج
                   end: Alignment.bottomCenter, // نهاية التدرج
                   colors: [
-                    const Color.fromARGB(255, 84, 23, 134), // اللون الأول
-                    const Color.fromARGB(255, 159, 85, 215), // اللون الثاني
+                    Color.fromARGB(255, 70, 16, 99),
+                    Color.fromARGB(255, 133, 91, 201),
+                    Color.fromARGB(255, 70, 16, 99),
                   ],
                 ),
                 boxShadow: [
@@ -148,6 +149,7 @@ class _AccountState extends State<Account> {
                     offset: const Offset(0, 5), // الاتجاه (x, y)
                   ),
                 ],
+                // border: Border.all(color: Colors.black),
               ),
 
               padding: const EdgeInsets.all(16),

@@ -5,12 +5,13 @@ import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:graduation_project_99/Firebase__/Auth.dart';
+
 import 'package:graduation_project_99/Firebase__/login.dart';
 import 'package:graduation_project_99/generated/l10n.dart';
 import 'package:graduation_project_99/features/mod/ModeProvider.dart';
 import 'package:graduation_project_99/features/mod/ModeTheme.dart';
 import 'package:graduation_project_99/pages/Chat_bot/API.dart';
+import 'package:graduation_project_99/splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -78,8 +79,12 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          home: auth(
-              setLocale: setLocale), // بدء التطبيق من auth وتمرير setLocale
+          home: splash(),
+          // auth(
+          //     setLocale: setLocale),
+              
+              
+               // بدء التطبيق من auth وتمرير setLocale
           builder: (context, child) {
             return Directionality(
               textDirection: _locale.languageCode == 'ar'

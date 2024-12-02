@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project_99/Firebase__/login.dart';
-import 'package:graduation_project_99/pages/hometest.dart';
 import 'package:graduation_project_99/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,15 +15,11 @@ class signup extends StatefulWidget {
 
 // ignore: camel_case_types
 class _signupState extends State<signup> {
-
-
   void setLocale(Locale value) async {
-    setState(() {
-    });
+    setState(() {});
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('locale', value.languageCode);
   }
-
 
   bool _obscureText = true;
   final _name = TextEditingController();
@@ -56,6 +51,7 @@ class _signupState extends State<signup> {
 
   void _showErrorMessage(String message) {
     showModalBottomSheet(
+        backgroundColor: const Color.fromARGB(255, 146, 94, 192),
         context: context,
         builder: (context) {
           return SizedBox(
@@ -82,8 +78,9 @@ class _signupState extends State<signup> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFFFFFFFF),
-              Color(0xFF520099),
+              Color.fromARGB(255, 142, 2, 218),
+              //  Color.fromARGB(255, 171, 124, 205),
+              Color.fromARGB(255, 36, 17, 52),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -98,7 +95,7 @@ class _signupState extends State<signup> {
                 const Center(
                     child: Text("Sign Up",
                         style: TextStyle(
-                            color: Color(0xFF7827A3),
+                            color: Color.fromARGB(255, 221, 221, 221),
                             fontSize: 30,
                             fontWeight: FontWeight.bold))),
                 const SizedBox(height: 100),
@@ -159,8 +156,12 @@ class _signupState extends State<signup> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("I have an account",
-                        style: TextStyle(fontSize: 18)),
+                    const Text(
+                      "I have an account",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 149, 0, 255),
+                          fontSize: 18),
+                    ),
                     const SizedBox(width: 10),
                     InkWell(
                       onTap: () {
