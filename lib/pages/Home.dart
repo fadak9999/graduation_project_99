@@ -111,7 +111,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.only(right: 30),
                     child: IconButton(
-                      color: const Color.fromARGB(255, 209, 7, 7),
+                      color: const Color.fromARGB(255, 255, 255, 255),
                       icon: const Icon(Icons.account_circle),
                       onPressed: () async {
                         await Get.to(
