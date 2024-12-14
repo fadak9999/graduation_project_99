@@ -2,8 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project_99/Firebase__/login.dart';
-import 'package:graduation_project_99/Home.dart';
+import 'package:graduation_project_99/pages/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+//todo
+// Firebase Auth: لتسجيل حساب جديد باستخدام Firebase.
+// Flutter: لإنشاء واجهة المستخدم.
+// GetX: للتنقل بين الصفحات بسهولة.
+// Shared Preferences: لتخزين إعدادات المستخدم محلياً.
+// صفحات مخصصة: الانتقال بين صفحات Login و Home.
+//todo
 
 // ignore: camel_case_types
 class signup extends StatefulWidget {
@@ -26,6 +33,12 @@ class _signupState extends State<signup> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _confirmPassword = TextEditingController();
+//todo  
+// متحكمات النصوص لحفظ مدخلات الحقول (الاسم، البريد، كلمة المرور، تأكيد كلمة المرور).
+// _obscureText يتحكم برؤية كلمة المرور.
+
+
+
 
   Future signIn() async {
     if (_email.text.isNotEmpty &&
@@ -48,7 +61,7 @@ class _signupState extends State<signup> {
       _showErrorMessage('تأكد من صحة البيانات');
     }
   }
-
+//?
   void _showErrorMessage(String message) {
     showModalBottomSheet(
         backgroundColor: const Color.fromARGB(255, 146, 94, 192),
@@ -79,7 +92,6 @@ class _signupState extends State<signup> {
           gradient: LinearGradient(
             colors: [
               Color.fromARGB(255, 142, 2, 218),
-              //  Color.fromARGB(255, 171, 124, 205),
               Color.fromARGB(255, 36, 17, 52),
             ],
             begin: Alignment.topCenter,
@@ -182,7 +194,7 @@ class _signupState extends State<signup> {
       ),
     );
   }
-
+//////////////////////////////////////////////////
   // إنشاء حقل إدخال
   Widget _buildInputField(
       {required TextEditingController controller,

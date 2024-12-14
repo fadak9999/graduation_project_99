@@ -39,16 +39,13 @@ class _TextToSpeechState extends State<TextToSpeech> {
                 _voices.first; // تحديد الصوت الأول عند تحميل الأصوات
             setVoice(_currentVoice!);
           } else {
-            // ignore: avoid_print
             print("No voices available");
           }
         });
       } else {
-        // ignore: avoid_print
         print("No voices returned");
       }
     } catch (e) {
-      // ignore: avoid_print
       print("Error getting voices: $e");
     }
   }
@@ -62,7 +59,6 @@ class _TextToSpeechState extends State<TextToSpeech> {
       try {
         await _flutterTts.speak(_textController.text);
       } catch (e) {
-        // ignore: avoid_print
         print("Error: $e");
       }
     }
@@ -74,7 +70,7 @@ class _TextToSpeechState extends State<TextToSpeech> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 82, 0, 109),
         title: const Text(
-          "Text-to-Speech", // ثابت كعنوان
+          "Text-to-Speech",
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -86,7 +82,7 @@ class _TextToSpeechState extends State<TextToSpeech> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
-                  "Enter text to speak", // نص ثابت بالإنجليزية
+                  "Enter text to speak",
                   style: TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 179, 178, 178),
@@ -98,7 +94,7 @@ class _TextToSpeechState extends State<TextToSpeech> {
                   maxLines: 3,
                   style: const TextStyle(fontSize: 18),
                   decoration: InputDecoration(
-                    hintText: "Type something...", // نص ثابت بالإنجليزية
+                    hintText: "Type something...",
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
@@ -121,7 +117,7 @@ class _TextToSpeechState extends State<TextToSpeech> {
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   child: const Text(
-                    "Speak", // نص ثابت بالإنجليزية
+                    "Speak",
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),

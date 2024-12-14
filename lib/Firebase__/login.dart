@@ -4,10 +4,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:graduation_project_99/Firebase__/signup.dart';
-import 'package:graduation_project_99/pages/hometest.dart';
-import 'package:graduation_project_99/Home.dart';
+import 'package:graduation_project_99/pages/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//todo
+// Firebase Auth: لتوفير خدمات المصادقة.
+// Material Design: لإنشاء واجهات المستخدم.
+// Font Awesome: لاستخدام أيقونات مخصصة.
+// GetX: لإدارة التنقل والحالة.
+// Google Sign-In: لدعم تسجيل الدخول بحساب جوجل.
+// Shared Preferences: لتخزين الإعدادات محلياً.
+// مشاريع مخصصة (Signup/Home): للانتقال بين الصفحات.
+//todo
+// ignore: camel_case_types
 class login extends StatefulWidget {
   const login({super.key});
 
@@ -15,16 +24,26 @@ class login extends StatefulWidget {
   State<login> createState() => _loginState();
 }
 
+//todo  صفحة تسجيل دخول باستخدام StatefulWidget لتحديث حالة الصفحة بشكل ديناميكي.
+
+// ignore: camel_case_types
 class _loginState extends State<login> {
   final _email = TextEditingController();
   final _password = TextEditingController();
-  bool _obscureText = true;
+  bool _obscureText = false;
+  
+  //todo
+// TextEditingController: للتحكم بحقول النصوص (البريد وكلمة المرور).
+// _obscureText: للتحكم برؤية كلمة المرور
+//todo
 
   void setLocale(Locale value) async {
     setState(() {});
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('locale', value.languageCode);
   }
+//todo  حفظ لغة المستخدم:
+//? تُستخدم لتخزين الإعدادات اللغوية في ذاكرة الجهاز باستخدام SharedPreferences.
 
   Future signInWithGoogle() async {
     final googleUser = await GoogleSignIn().signIn();
@@ -39,13 +58,11 @@ class _loginState extends State<login> {
     }
     final googleAuth = await googleUser.authentication;
 
-    final credential = GoogleAuthProvider.credential(
+    GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
     try {
-      final userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
       // إذا تم تسجيل الدخول بنجاح
       if (mounted) {
         Get.off(() => Home(setLocale: setLocale));
@@ -65,6 +82,9 @@ class _loginState extends State<login> {
       }
     }
   }
+  //todo  تسجيل الدخول باستخدام Google:  ^
+//   يسمح بتسجيل الدخول باستخدام Google.
+// يتحقق مما إذا تم تسجيل الدخول بنجاح أو إظهار رسالة خطأ إذا فشل.
 
   Future login() async {
     if (check_enter_user()) {
@@ -86,6 +106,7 @@ class _loginState extends State<login> {
         }
 
         showDialog(
+          // ignore: use_build_context_synchronously
           context: context,
           builder: (context) {
             return AlertDialog(
@@ -137,6 +158,11 @@ class _loginState extends State<login> {
       );
     }
   }
+  //todo  تسجيل الدخول بالبريد الإلكتروني:
+// يتحقق من صحة البيانات المدخلة.
+// يسجّل الدخول بالبريد وكلمة المرور.
+// يعالج الأخطاء ويوفر إشعارات ملائمة.
+  //todo
 
   bool check_enter_user() {
     if (_email.text.trim() != "" && _password.text.trim() != "") {
@@ -177,7 +203,7 @@ class _loginState extends State<login> {
             const SizedBox(height: 80),
             const Center(
               child: Text(
-                "⁓ Fae ⁓",
+                "⁓ Ai 99 ⁓",
                 style: TextStyle(
                   fontSize: 35,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -225,7 +251,7 @@ class _loginState extends State<login> {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextField(
                           controller: _email,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             icon: Icon(Icons.person_outline,
                                 color: Color.fromARGB(255, 87, 3,
@@ -238,7 +264,7 @@ class _loginState extends State<login> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color.fromARGB(
                                 255, 89, 4, 135), // اللون الأرجواني
                           ),
@@ -246,54 +272,6 @@ class _loginState extends State<login> {
                       ),
                     ),
                   ),
-
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  //   child: Container(
-                  //     decoration: BoxDecoration(
-                  //       color: Colors.white,
-                  //       borderRadius: BorderRadius.circular(25),
-                  //       boxShadow: [
-                  //         BoxShadow(
-                  //           color: Colors.black.withOpacity(0.15),
-                  //           offset: const Offset(4, 4),
-                  //           blurRadius: 15,
-                  //           spreadRadius: 1,
-                  //         ),
-                  //         BoxShadow(
-                  //           color: Colors.white.withOpacity(0.8),
-                  //           offset: const Offset(-4, -4),
-                  //           blurRadius: 15,
-                  //           spreadRadius: 1,
-                  //         ),
-                  //       ],
-                  //     ),
-
-                  //     child: Padding(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 20),
-                  //       child: TextField(
-                  //         controller: _email,
-                  //         decoration: const InputDecoration(
-                  //           border: InputBorder.none,
-                  //           icon: Icon(Icons.person_outline),
-                  //           //     hintText: "E-mail",
-
-                  //           hintText: "E-mail",
-                  //           hintStyle: TextStyle(
-                  //             color: Colors.grey, // لون النص الافتراضي
-                  //             fontSize: 16, // حجم النص
-                  //             fontWeight: FontWeight.w400, // وزن النص
-                  //           ),
-                  //         ),
-                  //         style: TextStyle(
-                  //           color: Colors.black, // لون النص الذي يتم إدخاله
-                  //         ),
-                  //       ),
-                  //     ),
-
-                  //   ),
-                  // ),
-                  //!
                   const SizedBox(height: 40),
                   //!!22
 
@@ -320,21 +298,27 @@ class _loginState extends State<login> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
+                        //!
                         child: TextField(
                           controller: _password,
                           obscureText: _obscureText,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            icon: Icon(Icons.lock_outline,
-                                color: Color.fromARGB(255, 93, 1,
-                                    143)), // الأيقونة باللون الأرجواني
+                            icon: const Icon(Icons.lock_outline,
+                                color: Color.fromARGB(255, 93, 1, 143)),
+                            hintText: "Password",
+                            hintStyle: const TextStyle(
+                              color: Color.fromARGB(
+                                  255, 86, 2, 131), // اللون الأرجواني
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _obscureText
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Color.fromARGB(255, 92, 5,
-                                    139), // الأيقونة باللون الأرجواني
+                                color: const Color.fromARGB(255, 92, 5, 139),
                               ),
                               onPressed: () {
                                 setState(() {
@@ -343,7 +327,7 @@ class _loginState extends State<login> {
                               },
                             ),
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color.fromARGB(
                                 255, 89, 4, 135), // اللون الأرجواني
                           ),
@@ -351,56 +335,7 @@ class _loginState extends State<login> {
                       ),
                     ),
                   ),
-
-                  //   Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  //   child: Container(
-                  //     decoration: BoxDecoration(
-                  //       color: Colors.white,
-                  //       borderRadius: BorderRadius.circular(25),
-                  //       boxShadow: [
-                  //         BoxShadow(
-                  //           color: Colors.black.withOpacity(0.15),
-                  //           offset: const Offset(4, 4),
-                  //           blurRadius: 15,
-                  //           spreadRadius: 1,
-                  //         ),
-                  //         BoxShadow(
-                  //           color: Colors.white.withOpacity(0.8),
-                  //           offset: const Offset(-4, -4),
-                  //           blurRadius: 15,
-                  //           spreadRadius: 1,
-                  //         ),
-                  //       ],
-                  //     ),
-                  //     child: Padding(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 20),
-                  //       child: TextField(
-                  //         controller: _password,
-                  //         obscureText: _obscureText,
-                  //         decoration: InputDecoration(
-                  //           border: InputBorder.none,
-                  //           icon: const Icon(Icons.lock_outline),
-
-                  //           //    hintText: "Password",
-                  //           suffixIcon: IconButton(
-                  //             icon: Icon(
-                  //               _obscureText
-                  //                   ? Icons.visibility
-                  //                   : Icons.visibility_off,
-                  //             ),
-                  //             onPressed: () {
-                  //               setState(() {
-                  //                 _obscureText = !_obscureText;
-                  //               });
-                  //             },
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  //!!22
+//!33
                   const SizedBox(height: 30),
                   InkWell(
                     child: Container(
@@ -469,3 +404,9 @@ class _loginState extends State<login> {
     );
   }
 }
+//todo 
+// واجهة المستخدم:
+// حقول الإدخال (البريد/كلمة المرور): تحتوي على تصميم جذاب مع أيقونات وخيارات لإخفاء كلمة المرور.
+// زر تسجيل الدخول: ينفذ دالة login عند النقر.
+// روابط تسجيل حساب جديد: للتنقل إلى صفحة التسجيل.
+// زر تسجيل الدخول باستخدام Google: يتيح للمستخدمين استخدام Google لتسجيل الدخول.

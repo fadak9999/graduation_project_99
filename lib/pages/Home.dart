@@ -1,13 +1,17 @@
+
+
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:graduation_project_99/pages/account.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:graduation_project_99/generated/l10n.dart';
-import 'package:graduation_project_99/pages/Chat_bot/Chatbot.dart';
-import 'package:graduation_project_99/pages/Speech%20to%20text/Speech_to_text.dart';
-import 'package:graduation_project_99/pages/image_to_text/image_to_text.dart';
-import 'package:graduation_project_99/pages/text_to_speech/text_to_speech.dart';
+import 'package:graduation_project_99/Sections/Chat_bot/Chatbot.dart';
+import 'package:graduation_project_99/Sections/Speech%20to%20text/Speech_to_text.dart';
+import 'package:graduation_project_99/Sections/image_to_text/image_to_text.dart';
+import 'package:graduation_project_99/Sections/text_to_speech/text_to_speech.dart';
 
 class Home extends StatefulWidget {
   final Function(Locale) setLocale;
@@ -55,16 +59,18 @@ class _HomeState extends State<Home> {
     }
 
     bool isRtl = _locale!.languageCode == 'ar';
-////////////////////////////////////////////////////////////////////////////
+
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
         //!appar
         appBar: PreferredSize(
-          preferredSize: const Size(double.infinity, 100),
+          preferredSize: Size(
+              double.infinity,
+              MediaQuery.of(context).size.height *
+                  0.15), // Adjusted for responsiveness
           child: Container(
             margin: const EdgeInsets.all(15),
-            //  height: 100,
             decoration: BoxDecoration(
               border:
                   Border.all(color: const Color.fromARGB(255, 101, 29, 135)),
@@ -88,25 +94,24 @@ class _HomeState extends State<Home> {
                     MainAxisAlignment.spaceBetween, // النص والأيقونة في الجوانب
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 30), // إضافة مسافة من الجانب الأيسر
+                    padding: const EdgeInsets.only(left: 30),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         S.of(context)!.titllehome,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: MediaQuery.of(context).size.width *
+                              0.05, // Adjust font size for responsiveness
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        right: 30), // إضافة مسافة من الجانب الأيمن
+                    padding: const EdgeInsets.only(right: 30),
                     child: IconButton(
-                      color: Colors.white,
+                      color: const Color.fromARGB(255, 209, 7, 7),
                       icon: const Icon(Icons.account_circle),
                       onPressed: () async {
                         await Get.to(
@@ -129,7 +134,7 @@ class _HomeState extends State<Home> {
             _buildFeatureContainer(
               context: context,
               gradientColors: [
-                Color.fromARGB(255, 76, 0, 117),
+                const Color.fromARGB(255, 76, 0, 117),
                 const Color.fromARGB(255, 133, 83, 186),
                 const Color.fromARGB(255, 51, 1, 84),
               ],
@@ -142,33 +147,33 @@ class _HomeState extends State<Home> {
             _buildFeatureContainer(
               context: context,
               gradientColors: [
-                Color.fromARGB(255, 76, 0, 117),
+                const Color.fromARGB(255, 76, 0, 117),
                 const Color.fromARGB(255, 133, 83, 186),
                 const Color.fromARGB(255, 51, 1, 84),
               ],
               margin: const EdgeInsets.only(left: 70),
               icon: FontAwesomeIcons.fileImage,
               label: S.of(context)?.text_to_imag ?? 'Image to Text',
-              onPressed: () => Get.to(const image_to_text()),
+              onPressed: () => Get.to(const ImageToText()),
             ),
             const SizedBox(height: 50),
             _buildFeatureContainer(
               context: context,
               gradientColors: [
-                Color.fromARGB(255, 76, 0, 117),
+                const Color.fromARGB(255, 76, 0, 117),
                 const Color.fromARGB(255, 133, 83, 186),
                 const Color.fromARGB(255, 51, 1, 84),
               ],
               margin: const EdgeInsets.only(right: 70),
               icon: FontAwesomeIcons.microphone,
               label: S.of(context)?.speech_to_text ?? 'Speech to Text',
-              onPressed: () => Get.to(const speech_to_text()),
+              onPressed: () => Get.to(const SpeechToTextPage()),
             ),
             const SizedBox(height: 50),
             _buildFeatureContainer(
               context: context,
               gradientColors: [
-                Color.fromARGB(255, 76, 0, 117),
+                const Color.fromARGB(255, 76, 0, 117),
                 const Color.fromARGB(255, 133, 83, 186),
                 const Color.fromARGB(255, 51, 1, 84),
               ],
@@ -177,15 +182,6 @@ class _HomeState extends State<Home> {
               label: S.of(context)?.text_to_speech ?? 'Text to Speech',
               onPressed: () => Get.to(const TextToSpeech()),
             ),
-            //!
-
-            // ElevatedButton(
-            //     onPressed: () {
-            //       Get.to(splash());
-            //     },
-            //     child: Text("data"))
-
-            //!
           ],
         ),
       ),
@@ -228,16 +224,14 @@ class _HomeState extends State<Home> {
             Border.all(color: const Color.fromARGB(255, 119, 1, 204), width: 2),
         boxShadow: [
           BoxShadow(
-            color: const Color.fromARGB(255, 77, 55, 87)
-                .withOpacity(0.4), // زيادة الشفافية لجعل الظلال أكثر نعومة
-            offset: const Offset(6, 12), // تحريك الظلال بشكل أكثر واقعية
-            blurRadius: 18, // تدرج الظل بشكل أكثر نعومة
-            spreadRadius: 2, // جعل الظل ينتشر بشكل أكبر
+            color: const Color.fromARGB(255, 77, 55, 87).withOpacity(0.4),
+            offset: const Offset(6, 12),
+            blurRadius: 18,
+            spreadRadius: 2,
           ),
           BoxShadow(
-            color: const Color.fromARGB(255, 0, 0, 0)
-                .withOpacity(0.15), // إضافة ظل خفيف أسود لزيادة الواقعية
-            offset: const Offset(-6, -12), // الظل المعاكس
+            color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.15),
+            offset: const Offset(-6, -12),
             blurRadius: 18,
             spreadRadius: 1,
           ),
@@ -252,7 +246,7 @@ class _HomeState extends State<Home> {
             icon: Icon(
               icon,
               color: Colors.white,
-              size: 40,
+              size: MediaQuery.of(context).size.width * 0.1, // Adjust icon size
             ),
           ),
           const SizedBox(width: 10),
@@ -260,9 +254,10 @@ class _HomeState extends State<Home> {
             onPressed: onPressed,
             child: Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: MediaQuery.of(context).size.width *
+                    0.05, // Adjust font size
                 fontWeight: FontWeight.bold,
               ),
             ),

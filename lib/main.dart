@@ -1,17 +1,18 @@
 // ignore_for_file: library_private_types_in_public_api
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-
 import 'package:graduation_project_99/Firebase__/login.dart';
 import 'package:graduation_project_99/generated/l10n.dart';
-import 'package:graduation_project_99/features/mod/ModeProvider.dart';
-import 'package:graduation_project_99/features/mod/ModeTheme.dart';
-import 'package:graduation_project_99/pages/Chat_bot/API.dart';
-import 'package:graduation_project_99/splash.dart';
+import 'package:graduation_project_99/mod/ModeProvider.dart';
+import 'package:graduation_project_99/mod/ModeTheme.dart';
+import 'package:graduation_project_99/Sections/Chat_bot/API.dart';
+import 'package:graduation_project_99/pages/splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,12 +26,23 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String localeCode = prefs.getString('locale') ?? 'en';
 
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ModeProvider(),
-      child: MyApp(initialLocale: Locale(localeCode)),
+
+
+runApp(
+    DevicePreview(
+      enabled: !kReleaseMode, // يعمل فقط في وضع التطوير
+      builder: (context) => ChangeNotifierProvider(
+        create: (context) => ModeProvider(),
+        child: MyApp(initialLocale: Locale(localeCode)),
+      ),
     ),
   );
+  // runApp(
+  //   ChangeNotifierProvider(
+  //     create: (context) => ModeProvider(),
+  //     child: MyApp(initialLocale: Locale(localeCode)),
+  //   ),
+  // );
 }
 
 class MyApp extends StatefulWidget {
@@ -64,14 +76,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Consumer<ModeProvider>(
       builder: (context, modeProvider, child) {
+        //
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           theme: modeProvider.lightModeEnable
               ? ModeTheme.lightMode
               : ModeTheme.darkMode,
           locale: _locale,
-          fallbackLocale:
-              const Locale('en'), // تحديد لغة افتراضية في حال كانت locale غير معينة
+          fallbackLocale: const Locale(
+              'en'), // تحديد لغة افتراضية في حال كانت locale غير معينة
           localizationsDelegates: const [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -79,12 +92,9 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          home: splash(),
-          // auth(
-          //     setLocale: setLocale),
-              
-              
-               // بدء التطبيق من auth وتمرير setLocale
+          //!-----
+          home: const Splash(),
+
           builder: (context, child) {
             return Directionality(
               textDirection: _locale.languageCode == 'ar'
@@ -93,9 +103,9 @@ class _MyAppState extends State<MyApp> {
               child: child!,
             );
           },
-            getPages: [
-    GetPage(name: '/login', page: () => login()),  // تأكد من أن LoginPage هي الصفحة الصحيحة
-  ],
+          getPages: [
+            GetPage(name: '/login', page: () => const login()),
+          ],
         );
       },
     );
