@@ -13,7 +13,7 @@ class ModeTheme {
   static final darkMode = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.purple,
+ seedColor: Colors.purple,
       brightness: Brightness.dark,
     ),
   );

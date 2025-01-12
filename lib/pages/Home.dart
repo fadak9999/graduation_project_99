@@ -8,10 +8,10 @@ import 'package:get/get.dart';
 import 'package:graduation_project_99/pages/account.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:graduation_project_99/generated/l10n.dart';
-import 'package:graduation_project_99/Sections/Chat_bot/Chatbot.dart';
-import 'package:graduation_project_99/Sections/Speech%20to%20text/Speech_to_text.dart';
-import 'package:graduation_project_99/Sections/image_to_text/image_to_text.dart';
-import 'package:graduation_project_99/Sections/text_to_speech/text_to_speech.dart';
+import 'package:graduation_project_99/pages/Sections/Chat_bot/Chatbot.dart';
+import 'package:graduation_project_99/pages/Sections/Speech%20to%20text/Speech_to_text.dart';
+import 'package:graduation_project_99/pages/Sections/image_to_text/image_to_text.dart';
+import 'package:graduation_project_99/pages/Sections/text_to_speech/text_to_speech.dart';
 
 class Home extends StatefulWidget {
   final Function(Locale) setLocale;
