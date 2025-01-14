@@ -51,5 +51,8 @@
         <string>ar</string>
 
     </array>
+	<key>NSMicrophoneUsageDescription</key>
+        <string>تحتاج هذه التطبيق إلى الوصول إلى الميكروفون للتعرف على الصوت.</string>
+
 </dict>
 </plist>

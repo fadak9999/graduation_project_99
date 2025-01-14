@@ -1,3 +1,4 @@
+
 // // ignore_for_file: file_names
 
 // import 'dart:io';
@@ -18,6 +19,8 @@
 // class _HomePageState extends State<Chatbot> {
 //   final Gemini gemini = Gemini.instance;
 //   final ImagePicker _picker = ImagePicker();
+//   final TextEditingController _messageController =
+//       TextEditingController(); // TextEditingController
 
 //   List<ChatMessage> messages = [];
 //   ChatUser currentUser = ChatUser(id: "0", firstName: "User");
@@ -67,54 +70,51 @@
 //       ),
 //     );
 //   }
-// ////////////////////////////////
-// ///
-// ///
-// ///
 
-// Widget _buildUI(double screenWidth, double screenHeight) {
-//   return DashChat(
-//     inputOptions: InputOptions(
-//       inputDecoration: InputDecoration(
-//         border: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(10.0),
-//           borderSide: BorderSide(color: Colors.white), // لون الإطار
+//   Widget _buildUI(double screenWidth, double screenHeight) {
+//     return DashChat(
+//       inputOptions: InputOptions(
+//         textController: _messageController,
+//         inputDecoration: InputDecoration(
+//           border: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(10.0),
+//             borderSide: const BorderSide(color: Colors.white),
+//           ),
+//           filled: true,
+//           fillColor: Colors.grey[800],
+//           hintText: 'اكتب رسالتك...',
+//           hintStyle: const TextStyle(color: Colors.purple),
+//           contentPadding:
+//               const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
 //         ),
-//         filled: true,
-//         fillColor: Colors.grey[800], // لون الخلفية داخل المربع
-//         hintText: 'اكتب رسالتك...',
-//         hintStyle: TextStyle(color: Colors.purple), // تغيير لون النص إلى الأرجواني
-//         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0), // زيادة المساحة داخل المربع
+//         trailing: [
+//           IconButton(
+//             onPressed: () {
+//               if (_messageController.text.trim().isNotEmpty) {
+//                 _sendMessage(ChatMessage(
+//                   user: currentUser,
+//                   createdAt: DateTime.now(),
+//                   text: _messageController.text.trim(),
+//                 ));
+//                 _messageController.clear(); // مسح النص بعد الإرسال
+//               }
+//             },
+//             icon: const Icon(
+//               Icons.send,
+//               color: Color.fromARGB(255, 149, 26, 232),
+//             ),
+//           ),
+//         ],
 //       ),
-//       trailing: [
-//         IconButton(
-//           onPressed: () {
-//             // استدعاء دالة إرسال الرسالة
-//             _sendMessage(ChatMessage(
-//               user: currentUser,
-//               createdAt: DateTime.now(),
-//               text: '', // يمكنك تخصيص النص هنا حسب احتياجاتك
-//             ));
-//           },
-//           icon: const Icon(
-//             Icons.send,
-//             color: Color.fromARGB(255, 149, 26, 232), // تغيير لون الأيقونة إلى الأحمر
-//           ),
-//         ),
-//         IconButton(
-//           onPressed: _showImageSourceActionSheet,
-//           icon: const Icon(
-//             Icons.image_outlined,
-//             color: Color.fromARGB(255, 197, 8, 255),
-//           ),
-//         ),
-//       ],
-//     ),
-//     currentUser: currentUser,
-//     onSend: _sendMessage,
-//     messages: messages,
-//   );
-// }
+//       currentUser: currentUser,
+//       onSend: (chatMessage) {
+//         _sendMessage(chatMessage);
+//         _messageController.clear(); // مسح النص بعد الإرسال
+//       },
+//       messages: messages,
+//     );
+
+//   }
 
 //   void _showImageSourceActionSheet() {
 //     showModalBottomSheet(
@@ -293,12 +293,21 @@
 //           ];
 //         });
 //       });
-//       // ignore: empty_catches
-//     } catch (e) {}
+//     } catch (e) {
+//       // Handle error
+//     }
 //   }
 // }
 
-//!----------------------------------------
+
+
+
+
+
+
+
+
+
 
 // ignore_for_file: file_names
 
@@ -372,153 +381,74 @@ class _HomePageState extends State<Chatbot> {
     );
   }
 
-  Widget _buildUI(double screenWidth, double screenHeight) {
-    return DashChat(
-      inputOptions: InputOptions(
-        textController: _messageController,
-        inputDecoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(color: Colors.white),
-          ),
-          filled: true,
-          fillColor: Colors.grey[800],
-          hintText: 'اكتب رسالتك...',
-          hintStyle: const TextStyle(color: Colors.purple),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+Widget _buildUI(double screenWidth, double screenHeight) {
+  return DashChat(
+    onSend: (ChatMessage message) {
+      _sendMessage(message); // معالجة الرسالة عند الإرسال
+    },
+    inputOptions: InputOptions(
+      textController: _messageController,
+      inputDecoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: const BorderSide(color: Colors.white),
         ),
-        trailing: [
-          IconButton(
-            onPressed: () {
-              if (_messageController.text.trim().isNotEmpty) {
-                _sendMessage(ChatMessage(
-                  user: currentUser,
-                  createdAt: DateTime.now(),
-                  text: _messageController.text.trim(),
-                ));
-                _messageController.clear(); // مسح النص بعد الإرسال
-              }
-            },
-            icon: const Icon(
-              Icons.send,
-              color: Color.fromARGB(255, 149, 26, 232),
-            ),
+        filled: true,
+        fillColor: Colors.grey[800],
+        hintText: 'اكتب رسالتك...',
+        hintStyle: const TextStyle(color: Colors.purple),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+      ),
+      trailing: [
+        IconButton(
+          onPressed: () {
+            if (_messageController.text.trim().isNotEmpty) {
+              _sendMessage(ChatMessage(
+                user: currentUser,
+                createdAt: DateTime.now(),
+                text: _messageController.text.trim(),
+              ));
+              _messageController.clear(); // مسح النص بعد الإرسال
+            }
+          },
+          icon: const Icon(
+            Icons.send,
+            color: Color.fromARGB(255, 149, 26, 232),
           ),
-        ],
-      ),
-      currentUser: currentUser,
-      onSend: (chatMessage) {
-        _sendMessage(chatMessage);
-        _messageController.clear(); // مسح النص بعد الإرسال
-      },
-      messages: messages,
-    );
-
-    // return DashChat(
-    //   inputOptions: InputOptions(
-    //     textController:
-    //         _messageController, // ربط TextEditingController بمربع النص
-    //     inputDecoration: InputDecoration(
-    //       border: OutlineInputBorder(
-    //         borderRadius: BorderRadius.circular(10.0),
-    //         borderSide: const BorderSide(color: Colors.white),
-    //       ),
-    //       filled: true,
-    //       fillColor: Colors.grey[800],
-    //       hintText: 'اكتب رسالتك...',
-    //       hintStyle: const TextStyle(color: Colors.purple),
-    //       contentPadding:
-    //           const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-    //     ),
-    //     trailing: [
-    //       IconButton(
-    //         onPressed: () {
-    //           if (_messageController.text.trim().isNotEmpty) {
-    //             _sendMessage(ChatMessage(
-    //               user: currentUser,
-    //               createdAt: DateTime.now(),
-    //               text: _messageController.text.trim(),
-    //             ));
-    //             _messageController.clear(); // مسح النص بعد الإرسال
-    //           }
-    //         },
-    //         icon: const Icon(
-    //           Icons.send,
-    //           color: Color.fromARGB(255, 149, 26, 232),
-    //         ),
-    //       ),
-    //       IconButton(
-    //         onPressed: _showImageSourceActionSheet,
-    //         icon: const Icon(
-    //           Icons.image_outlined,
-    //           color: Color.fromARGB(255, 197, 8, 255),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    //   currentUser: currentUser,
-    //   onSend: (chatMessage) {
-    //     _sendMessage(chatMessage);
-    //     _messageController.clear(); // مسح النص بعد الإرسال
-    //   },
-    //   messages: messages,
-    // );
-  }
-
-  void _showImageSourceActionSheet() {
-    showModalBottomSheet(
-      backgroundColor: Colors.grey[850],
-      context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      builder: (context) {
-        return SafeArea(
-          child: Wrap(
-            children: <Widget>[
-              ListTile(
-                leading: const Icon(
-                  Icons.photo_library,
-                  color: Colors.white,
-                ),
-                title: const Text(
-                  'الاستوديو',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  _pickImage(ImageSource.gallery);
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.camera_alt,
-                  color: Colors.white,
-                ),
-                title: const Text(
-                  'الكاميرا',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  _pickImage(ImageSource.camera);
-                },
-              ),
-            ],
+        ),
+      ],
+    ),
+    currentUser: currentUser,
+    messages: messages,
+    messageOptions: MessageOptions(
+      currentUserContainerColor: Colors.deepPurpleAccent, // خلفية الرسائل المرسلة
+      containerColor: const Color(0xFF2B2B2B), // خلفية الرسائل المستلمة
+      textColor: Colors.white, // لون النص في الرسائل المستلمة
+      currentUserTextColor: Colors.white, // لون النص في الرسائل المرسلة
+      messagePadding: const EdgeInsets.all(12.0), // تعديل الحواف
+      borderRadius: 15.0, // زوايا الرسائل المستديرة
+      showOtherUsersAvatar: true, // عرض صورة المستخدم الآخر
+      avatarBuilder: (user, onTap, longPress) {
+        return GestureDetector(
+          onTap: () {
+            if (onTap != null) onTap();
+          },
+          onLongPress: () {
+            if (longPress != null) longPress();
+          },
+          child: CircleAvatar(
+            backgroundImage: user.profileImage != null && user.profileImage!.isNotEmpty
+                ? AssetImage(user.profileImage!)
+                : const AssetImage('google-gemini.png'),
+            radius: 16,
           ),
         );
       },
-    );
-  }
+    ),
+  );
+}
+
 
   Future<void> _pickImage(ImageSource source) async {
     final XFile? file = await _picker.pickImage(source: source);
