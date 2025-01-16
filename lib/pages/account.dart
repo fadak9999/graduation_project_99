@@ -199,9 +199,9 @@ class _AccountState extends State<Account> {
                             onTap: _pickImage,
                             child: Container(
                               padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: const Color(0xFF4A148C),
+                                color: Color(0xFF4A148C),
                               ),
                               child: const Icon(
                                 Icons.add_a_photo,
