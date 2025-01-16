@@ -31,7 +31,7 @@ class _loginState extends State<login> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool _obscureText = false;
-  
+
   //todo
 // TextEditingController: للتحكم بحقول النصوص (البريد وكلمة المرور).
 // _obscureText: للتحكم برؤية كلمة المرور
@@ -180,7 +180,7 @@ class _loginState extends State<login> {
   }
 
   void go_to_signUp() {
-    Get.off(const signup());
+    Get.off(const Signup());
   }
 
   @override
@@ -190,9 +190,8 @@ class _loginState extends State<login> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 142, 2, 218),
-              //  Color.fromARGB(255, 171, 124, 205),
-              Color.fromARGB(255, 37, 0, 67),
+              Color.fromARGB(255, 47, 3, 97),
+              Color.fromARGB(255, 214, 188, 236),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -203,7 +202,7 @@ class _loginState extends State<login> {
             const SizedBox(height: 80),
             const Center(
               child: Text(
-                "⁓ Ai 99 ⁓",
+                " Ai 99 ",
                 style: TextStyle(
                   fontSize: 35,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -218,7 +217,7 @@ class _loginState extends State<login> {
                 ),
               ),
             ),
-            const SizedBox(height: 135),
+            const SizedBox(height: 120),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -227,7 +226,7 @@ class _loginState extends State<login> {
                   //!
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -276,7 +275,7 @@ class _loginState extends State<login> {
                   //!!22
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -356,7 +355,7 @@ class _loginState extends State<login> {
                         child: Text(
                           "Log in",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 227, 223, 223)),
+                              color: Color.fromARGB(255, 255, 255, 255)),
                         ),
                       ),
                     ),
@@ -365,26 +364,38 @@ class _loginState extends State<login> {
                     },
                   ),
                   const SizedBox(height: 60),
-                  Column(
+
+//
+                  Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.center, // تمركز النصوص في المنتصف
                     children: [
                       const Text(
-                        "If you do not have a previous account",
+                        "If you do not have a previous account,",
                         style: TextStyle(
-                            fontSize: 14,
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                          fontSize: 12, // حجم الخط
+                          color: Color.fromARGB(255, 255, 255, 255), // لون النص
+                        ),
                       ),
                       TextButton(
                         onPressed: () {
-                          go_to_signUp();
+                          go_to_signUp(); // استدعاء الدالة عند الضغط
                         },
                         child: const Text(
                           "Create a new account",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 54, 112, 236)),
+                            fontSize: 12, // نفس حجم النص الأول
+                            fontWeight:
+                                FontWeight.bold, // خط غامق للنص القابل للضغط
+                            color: Color.fromARGB(
+                                255, 54, 112, 236), // لون أزرق للنص
+                          ),
                         ),
                       ),
                     ],
                   ),
+
+                 
                   IconButton(
                     icon: const Icon(
                       FontAwesomeIcons.google,
@@ -410,3 +421,11 @@ class _loginState extends State<login> {
 // زر تسجيل الدخول: ينفذ دالة login عند النقر.
 // روابط تسجيل حساب جديد: للتنقل إلى صفحة التسجيل.
 // زر تسجيل الدخول باستخدام Google: يتيح للمستخدمين استخدام Google لتسجيل الدخول.
+
+
+
+
+
+
+
+

@@ -49,7 +49,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // التحقق من أن _locale تم تحميله
     if (_locale == null) {
       return const Scaffold(
         body: Center(
@@ -63,17 +62,15 @@ class _HomeState extends State<Home> {
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(
-        //!appar
         appBar: PreferredSize(
           preferredSize: Size(
-              double.infinity,
-              MediaQuery.of(context).size.height *
-                  0.15), // Adjusted for responsiveness
+            double.infinity,
+            MediaQuery.of(context).size.height * 0.15,
+          ),
           child: Container(
             margin: const EdgeInsets.all(15),
             decoration: BoxDecoration(
-              border:
-                  Border.all(color: const Color.fromARGB(255, 101, 29, 135)),
+              border: Border.all(color: const Color.fromARGB(255, 101, 29, 135)),
               gradient: const LinearGradient(
                 colors: [
                   Color.fromARGB(255, 70, 16, 99),
@@ -90,8 +87,7 @@ class _HomeState extends State<Home> {
             ),
             child: Center(
               child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween, // النص والأيقونة في الجوانب
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 30),
@@ -101,8 +97,7 @@ class _HomeState extends State<Home> {
                         S.of(context)!.titllehome,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width *
-                              0.05, // Adjust font size for responsiveness
+                          fontSize: MediaQuery.of(context).size.width * 0.05,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -113,6 +108,7 @@ class _HomeState extends State<Home> {
                     child: IconButton(
                       color: const Color.fromARGB(255, 255, 255, 255),
                       icon: const Icon(Icons.account_circle),
+                      iconSize: 40,
                       onPressed: () async {
                         await Get.to(
                           Account(setLocale: _changeLanguage, userEmail: ''),
@@ -126,8 +122,6 @@ class _HomeState extends State<Home> {
             ),
           ),
         ),
-
-        //!appar
         body: ListView(
           children: [
             const SizedBox(height: 30),
@@ -188,7 +182,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  ///;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   Widget _buildFeatureContainer({
     required BuildContext context,
     required List<Color> gradientColors,
@@ -220,20 +213,19 @@ class _HomeState extends State<Home> {
               ? const Radius.circular(100)
               : Radius.zero,
         ),
-        border:
-            Border.all(color: const Color.fromARGB(255, 119, 1, 204), width: 2),
+        border: Border.all(color: const Color.fromARGB(255, 119, 1, 204), width: 2),
         boxShadow: [
           BoxShadow(
-            color: const Color.fromARGB(255, 77, 55, 87).withOpacity(0.4),
-            offset: const Offset(6, 12),
-            blurRadius: 18,
-            spreadRadius: 2,
+            color: Colors.black.withOpacity(0.2),
+            offset: const Offset(6, 6),
+            blurRadius: 20,
+            spreadRadius: 3,
           ),
           BoxShadow(
-            color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.15),
-            offset: const Offset(-6, -12),
-            blurRadius: 18,
-            spreadRadius: 1,
+            color: Colors.white.withOpacity(0.15),
+            offset: const Offset(-6, -6),
+            blurRadius: 15,
+            spreadRadius: 2,
           ),
         ],
       ),
@@ -246,7 +238,7 @@ class _HomeState extends State<Home> {
             icon: Icon(
               icon,
               color: Colors.white,
-              size: MediaQuery.of(context).size.width * 0.1, // Adjust icon size
+              size: MediaQuery.of(context).size.width * 0.1,
             ),
           ),
           const SizedBox(width: 10),
@@ -256,8 +248,7 @@ class _HomeState extends State<Home> {
               label,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: MediaQuery.of(context).size.width *
-                    0.05, // Adjust font size
+                fontSize: MediaQuery.of(context).size.width * 0.05,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -267,3 +258,14 @@ class _HomeState extends State<Home> {
     );
   }
 }
+  
+
+
+
+
+
+
+
+
+
+
