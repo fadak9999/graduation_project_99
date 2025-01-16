@@ -16,8 +16,6 @@ import 'package:graduation_project_99/pages/splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-//const String GEMINI_API_KEY = 'AIzaSyDg-TmHL20iubkcKJ1L5SMB5fw6sjlgyrU';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

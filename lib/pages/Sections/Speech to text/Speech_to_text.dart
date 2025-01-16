@@ -14,7 +14,6 @@ class _SpeechToTextPageState extends State<SpeechToTextPage> {
   final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _wordsSpoken = "Press the button to start listening...";
-  double _confidenceLevel = 0;
   String _selectedLanguage = 'en_US';
 
   @override
@@ -63,7 +62,6 @@ class _SpeechToTextPageState extends State<SpeechToTextPage> {
   void _onSpeechResult(result) {
     setState(() {
       _wordsSpoken = result.recognizedWords;
-      _confidenceLevel = result.confidence;
     });
   }
 

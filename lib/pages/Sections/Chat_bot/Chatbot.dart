@@ -1,6 +1,3 @@
-
-
-
 // ignore_for_file: file_names
 
 import 'dart:io';
@@ -21,8 +18,7 @@ class Chatbot extends StatefulWidget {
 class _HomePageState extends State<Chatbot> {
   final Gemini gemini = Gemini.instance;
   final ImagePicker _picker = ImagePicker();
-  final TextEditingController _messageController =
-      TextEditingController(); // TextEditingController
+  final TextEditingController _messageController = TextEditingController();
 
   List<ChatMessage> messages = [];
   ChatUser currentUser = ChatUser(id: "0", firstName: "User");
@@ -48,12 +44,9 @@ class _HomePageState extends State<Chatbot> {
 
   @override
   Widget build(BuildContext context) {
-    // Get screen width and height for responsiveness
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-///////////////////////////////////////////////////////////
     return Scaffold(
-      //  backgroundColor: const Color.fromARGB(255, 19, 18, 18),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 69, 1, 96),
         centerTitle: true,
@@ -63,34 +56,22 @@ class _HomePageState extends State<Chatbot> {
               fontSize: 25, color: Color.fromARGB(255, 255, 255, 255)),
         ),
         iconTheme: const IconThemeData(
-          color: Colors.white, // لون أيقونة الرجوع
+          color: Colors.white,
         ),
       ),
-
-      // AppBar(
-      //   backgroundColor: const Color.fromARGB(255, 69, 1, 96),
-      //   centerTitle: true,
-      //   title: const Text(
-      //     "Gemini Chat",
-      //     style: TextStyle(
-      //         fontSize: 25, color: Color.fromARGB(255, 255, 255, 255)),
-      //   ),
-      // ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(
-              screenWidth * 0.05), // Add padding for responsiveness
+          padding: EdgeInsets.all(screenWidth * 0.05),
           child: _buildUI(screenWidth, screenHeight),
         ),
       ),
     );
   }
 
-//!
   Widget _buildUI(double screenWidth, double screenHeight) {
     return DashChat(
       onSend: (ChatMessage message) {
-        _sendMessage(message); // معالجة الرسالة عند الإرسال
+        _sendMessage(message);
       },
       inputOptions: InputOptions(
         textController: _messageController,
@@ -100,29 +81,39 @@ class _HomePageState extends State<Chatbot> {
             borderSide: const BorderSide(color: Colors.white),
           ),
           filled: true,
-          fillColor: Colors.grey[800], // لون خلفية الحقل
-          hintText: 'اكتب رسالتك...', // النص التوضيحي
-          hintStyle: const TextStyle(color: Colors.purple), // لون النص التوضيحي
+          fillColor: Colors.grey[800],
+          hintText: 'Type your message...',
+          hintStyle: const TextStyle(color: Colors.purple),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+          suffixIcon: IconButton(
+            icon: const Icon(Icons.attach_file, color: Colors.white),
+            onPressed: () {
+              _pickImage(ImageSource.gallery);
+            },
+          ),
         ),
         inputTextStyle: const TextStyle(
-          color: Colors.white, // لون النص المكتوب
-          fontSize: 16.0, // حجم النص المكتوب
+          color: Colors.white,
+          fontSize: 16.0,
         ),
-        // تعطيل خاصية trailing لمنع ظهور أيقونة مكررة
+        sendButtonBuilder: (VoidCallback onSend) {
+          return IconButton(
+            icon: const Icon(Icons.send, color: Colors.purple),
+            onPressed: onSend,
+          );
+        },
       ),
       currentUser: currentUser,
       messages: messages,
       messageOptions: MessageOptions(
-        currentUserContainerColor:
-            Colors.deepPurpleAccent, // خلفية الرسائل المرسلة
-        containerColor: const Color(0xFF2B2B2B), // خلفية الرسائل المستلمة
-        textColor: Colors.white, // لون النص في الرسائل المستلمة
-        currentUserTextColor: Colors.white, // لون النص في الرسائل المرسلة
-        messagePadding: const EdgeInsets.all(12.0), // تعديل الحواف
-        borderRadius: 15.0, // زوايا الرسائل المستديرة
-        showOtherUsersAvatar: true, // عرض صورة المستخدم الآخر
+        currentUserContainerColor: Colors.deepPurpleAccent,
+        containerColor: const Color(0xFF2B2B2B),
+        textColor: Colors.white,
+        currentUserTextColor: Colors.white,
+        messagePadding: const EdgeInsets.all(12.0),
+        borderRadius: 15.0,
+        showOtherUsersAvatar: true,
         avatarBuilder: (user, onTap, longPress) {
           return GestureDetector(
             onTap: () {
@@ -144,8 +135,6 @@ class _HomePageState extends State<Chatbot> {
     );
   }
 
-
-
   Future<void> _pickImage(ImageSource source) async {
     final XFile? file = await _picker.pickImage(source: source);
     if (file != null) {
@@ -161,7 +150,7 @@ class _HomePageState extends State<Chatbot> {
         return AlertDialog(
           backgroundColor: const Color.fromARGB(255, 66, 0, 102),
           title: const Text(
-            "أدخل وصف للصورة",
+            "Enter a description for the image",
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -171,7 +160,7 @@ class _HomePageState extends State<Chatbot> {
           content: TextField(
             controller: descriptionController,
             decoration: const InputDecoration(
-              hintText: "اكتب الوصف هنا...",
+              hintText: "Write the description here...",
               hintStyle: TextStyle(color: Colors.white),
             ),
             style: const TextStyle(color: Colors.white),
@@ -182,7 +171,7 @@ class _HomePageState extends State<Chatbot> {
                 Navigator.of(context).pop();
               },
               child: const Text(
-                "إلغاء",
+                "Cancel",
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -196,7 +185,7 @@ class _HomePageState extends State<Chatbot> {
                 _sendMediaMessage(file, descriptionController.text);
               },
               child: const Text(
-                "إرسال",
+                "Send",
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -231,7 +220,6 @@ class _HomePageState extends State<Chatbot> {
       messages = [chatMessage, ...messages];
     });
 
-    // Add typing indicator temporarily
     ChatMessage typingIndicator = ChatMessage(
       user: geminiUser,
       createdAt: DateTime.now(),
@@ -256,7 +244,6 @@ class _HomePageState extends State<Chatbot> {
                 "", (previous, current) => "$previous ${current.text}") ??
             "";
 
-        // Remove typing indicator and add response
         setState(() {
           messages.removeWhere((msg) => msg.text == '...');
           messages = [
@@ -274,13 +261,6 @@ class _HomePageState extends State<Chatbot> {
     }
   }
 }
-   
-
-
-
-
-
-
 
 
 
