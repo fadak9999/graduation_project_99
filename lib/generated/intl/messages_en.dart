@@ -21,10 +21,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "chatbot" : MessageLookupByLibrary.simpleMessage("chatbot"),
-    "speech_to_text" : MessageLookupByLibrary.simpleMessage("speech to text"),
-    "text_to_imag" : MessageLookupByLibrary.simpleMessage("text to imag"),
-    "text_to_speech" : MessageLookupByLibrary.simpleMessage("text to speech"),
+    "Choose_an_image" : MessageLookupByLibrary.simpleMessage("Choose an Image"),
+    "Enter" : MessageLookupByLibrary.simpleMessage("Enter text to speak"),
+    "Language" : MessageLookupByLibrary.simpleMessage("Language"),
+    "chatbot" : MessageLookupByLibrary.simpleMessage("Chatbot"),
+    "listening_now" : MessageLookupByLibrary.simpleMessage("Listening now..."),
+    "microphone_permission_required" : MessageLookupByLibrary.simpleMessage("Microphone permission is required to use this feature."),
+    "press_mic_to_speak" : MessageLookupByLibrary.simpleMessage("Press the microphone to speak..."),
+    "speak" : MessageLookupByLibrary.simpleMessage("Speak"),
+    "speech_not_initialized" : MessageLookupByLibrary.simpleMessage("Speech recognition is not initialized properly."),
+    "speech_to_text" : MessageLookupByLibrary.simpleMessage("Speech To Text"),
+    "speech_will_appear_here" : MessageLookupByLibrary.simpleMessage("Your speech will appear here..."),
+    "text_to_imag" : MessageLookupByLibrary.simpleMessage("Text To Image"),
+    "text_to_speech" : MessageLookupByLibrary.simpleMessage("Text To Speech"),
     "titllehome" : MessageLookupByLibrary.simpleMessage("Sections")
   };
 }

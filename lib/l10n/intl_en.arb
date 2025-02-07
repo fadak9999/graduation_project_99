@@ -1,10 +1,33 @@
 {"titllehome":"Sections",
 
-"chatbot":"chatbot",
+"chatbot":"Chatbot",
 
-"text_to_imag":"text to imag"
+"text_to_imag":"Text To Image"
 ,
-"text_to_speech":"text to speech"
+"text_to_speech":"Text To Speech"
 ,
-"speech_to_text":"speech to text"
+"speech_to_text":"Speech To Text"
+,
+"Choose_an_image":"Choose an Image"
+,
+"Language":"Language"
+,
+"Enter":"Enter text to speak"
+,
+"speak":"Speak",
+
+
+"press_mic_to_speak": "Press the microphone to speak...",
+"microphone_permission_required": "Microphone permission is required to use this feature.",
+"speech_not_initialized": "Speech recognition is not initialized properly.",
+"speech_will_appear_here": "Your speech will appear here...",
+"listening_now": "Listening now..."
+
+
+
+
+
+
+
+
 }

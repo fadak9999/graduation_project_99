@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:graduation_project_99/generated/l10n.dart';
 
 class TextToSpeech extends StatefulWidget {
   const TextToSpeech({super.key});
@@ -69,9 +70,11 @@ class _TextToSpeechState extends State<TextToSpeech> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 82, 0, 109),
-        title: const Text(
-          "Text-to-Speech",
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          S.of(context)!.text_to_speech,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
         ),
       ),
       body: Padding(
@@ -81,11 +84,11 @@ class _TextToSpeechState extends State<TextToSpeech> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  "Enter text to speak",
-                  style: TextStyle(
+                Text(
+                  S.of(context)!.Enter, // استخدام المفتاح Enter
+                  style: const TextStyle(
                     fontSize: 20,
-                    color: Color.fromARGB(255, 179, 178, 178),
+                    color: Color.fromARGB(255, 115, 1, 180),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -96,7 +99,7 @@ class _TextToSpeechState extends State<TextToSpeech> {
                   decoration: InputDecoration(
                     hintText: "Type something...",
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: const Color.fromARGB(255, 132, 132, 132),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: const BorderSide(
@@ -116,9 +119,12 @@ class _TextToSpeechState extends State<TextToSpeech> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: const Text(
-                    "Speak",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  child: Text(
+                    S.of(context)!.speak, // استخدام المفتاح Enter
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 223, 223, 223),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),

@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
     }
 
     bool isRtl = _locale!.languageCode == 'ar';
-
+////////////////////////////////////////////////////////////////////
     return Directionality(
       textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
       child: Scaffold(

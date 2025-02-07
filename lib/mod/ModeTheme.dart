@@ -72,9 +72,8 @@ class ModeTheme {
       seedColor: Colors.purple,
       brightness: Brightness.light,
     ).copyWith(
-      background: const Color(0xFFF8F8F8), // لون الخلفية أبيض مائل للرمادي
       surface: const Color(0xFFFFFFFF), // سطح أبيض مريح للعين
-      onBackground: const Color(0xFF333333), // نص داكن واضح للقراءة
+      onSurface: const Color(0xFF333333), // نص داكن واضح للقراءة
     ),
   );
 
@@ -85,9 +84,8 @@ class ModeTheme {
       seedColor: Colors.purple,
       brightness: Brightness.dark,
     ).copyWith(
-      background: const Color(0xFF1E1E2C), // خلفية رمادية داكنة مريحة
       surface: const Color.fromARGB(255, 26, 26, 33), // سطح رمادي داكن
-      onBackground: const Color(0xFFE0E0E0), // نص فاتح مريح للعين
+      onSurface: const Color(0xFFE0E0E0), // نص فاتح مريح للعين
     ),
   );
 }

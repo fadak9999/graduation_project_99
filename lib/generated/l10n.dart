@@ -45,41 +45,131 @@ class S {
     );
   }
 
-  /// `chatbot`
+  /// `Chatbot`
   String get chatbot {
     return Intl.message(
-      'chatbot',
+      'Chatbot',
       name: 'chatbot',
       desc: '',
       args: [],
     );
   }
 
-  /// `text to imag`
+  /// `Text To Image`
   String get text_to_imag {
     return Intl.message(
-      'text to imag',
+      'Text To Image',
       name: 'text_to_imag',
       desc: '',
       args: [],
     );
   }
 
-  /// `text to speech`
+  /// `Text To Speech`
   String get text_to_speech {
     return Intl.message(
-      'text to speech',
+      'Text To Speech',
       name: 'text_to_speech',
       desc: '',
       args: [],
     );
   }
 
-  /// `speech to text`
+  /// `Speech To Text`
   String get speech_to_text {
     return Intl.message(
-      'speech to text',
+      'Speech To Text',
       name: 'speech_to_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose an Image`
+  String get Choose_an_image {
+    return Intl.message(
+      'Choose an Image',
+      name: 'Choose_an_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get Language {
+    return Intl.message(
+      'Language',
+      name: 'Language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter text to speak`
+  String get Enter {
+    return Intl.message(
+      'Enter text to speak',
+      name: 'Enter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speak`
+  String get speak {
+    return Intl.message(
+      'Speak',
+      name: 'speak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Press the microphone to speak...`
+  String get press_mic_to_speak {
+    return Intl.message(
+      'Press the microphone to speak...',
+      name: 'press_mic_to_speak',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Microphone permission is required to use this feature.`
+  String get microphone_permission_required {
+    return Intl.message(
+      'Microphone permission is required to use this feature.',
+      name: 'microphone_permission_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speech recognition is not initialized properly.`
+  String get speech_not_initialized {
+    return Intl.message(
+      'Speech recognition is not initialized properly.',
+      name: 'speech_not_initialized',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your speech will appear here...`
+  String get speech_will_appear_here {
+    return Intl.message(
+      'Your speech will appear here...',
+      name: 'speech_will_appear_here',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Listening now...`
+  String get listening_now {
+    return Intl.message(
+      'Listening now...',
+      name: 'listening_now',
       desc: '',
       args: [],
     );

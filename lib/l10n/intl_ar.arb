@@ -6,6 +6,21 @@
 "text_to_speech":"تحويل النص الى كلام"
 ,
 "speech_to_text":"تحويل الكلام الى نص"
+,
+"Choose_an_image":"اختر صورة"
+,
+"Language":"اللغة"
+,
+"Enter":"أدخل النص للتحدث"
+,
+"speak":"تحدث",
+"press_mic_to_speak": "اضغط على الميكروفون للتحدث..."
+,
+"speech_not_initialized": "التعرف على الصوت غير مهيأ بشكل صحيح."
+, "speech_will_appear_here": "سيظهر النص المنطوق هنا..."
+,  "listening_now": "يتم الاستماع الآن..."
+,
+"microphone_permission_required": "يجب السماح باستخدام الميكروفون لاستخدام هذه الميزة."
 
 
 }

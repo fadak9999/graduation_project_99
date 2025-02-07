@@ -21,8 +21,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "Choose_an_image" : MessageLookupByLibrary.simpleMessage("اختر صورة"),
+    "Enter" : MessageLookupByLibrary.simpleMessage("أدخل النص للتحدث"),
+    "Language" : MessageLookupByLibrary.simpleMessage("اللغة"),
     "chatbot" : MessageLookupByLibrary.simpleMessage("محادثة"),
+    "listening_now" : MessageLookupByLibrary.simpleMessage("يتم الاستماع الآن..."),
+    "microphone_permission_required" : MessageLookupByLibrary.simpleMessage("يجب السماح باستخدام الميكروفون لاستخدام هذه الميزة."),
+    "press_mic_to_speak" : MessageLookupByLibrary.simpleMessage("اضغط على الميكروفون للتحدث..."),
+    "speak" : MessageLookupByLibrary.simpleMessage("تحدث"),
+    "speech_not_initialized" : MessageLookupByLibrary.simpleMessage("التعرف على الصوت غير مهيأ بشكل صحيح."),
     "speech_to_text" : MessageLookupByLibrary.simpleMessage("تحويل الكلام الى نص"),
+    "speech_will_appear_here" : MessageLookupByLibrary.simpleMessage("سيظهر النص المنطوق هنا..."),
     "text_to_imag" : MessageLookupByLibrary.simpleMessage("استخراج النص من الصوة"),
     "text_to_speech" : MessageLookupByLibrary.simpleMessage("تحويل النص الى كلام"),
     "titllehome" : MessageLookupByLibrary.simpleMessage("اقسام")
