@@ -1,12 +1,12 @@
 // ignore_for_file: file_names
 
+import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'API.dart'; 
 
 class Chatbot extends StatefulWidget {
   const Chatbot({super.key});
@@ -16,15 +16,14 @@ class Chatbot extends StatefulWidget {
 }
 
 class _HomePageState extends State<Chatbot> {
-  final Gemini gemini = Gemini.instance;
   final ImagePicker _picker = ImagePicker();
   final TextEditingController _messageController = TextEditingController();
-
+  
   List<ChatMessage> messages = [];
   ChatUser currentUser = ChatUser(id: "0", firstName: "User");
   ChatUser geminiUser = ChatUser(
     id: "1",
-    firstName: "Gemini :) \n ",
+    firstName: "Gemini :)",
     profileImage: "assets/google-gemini.png",
   );
 
@@ -52,12 +51,9 @@ class _HomePageState extends State<Chatbot> {
         centerTitle: true,
         title: const Text(
           "Gemini Chat",
-          style: TextStyle(
-              fontSize: 25, color: Color.fromARGB(255, 255, 255, 255)),
+          style: TextStyle(fontSize: 25, color: Colors.white),
         ),
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SafeArea(
         child: Padding(
@@ -84,8 +80,7 @@ class _HomePageState extends State<Chatbot> {
           fillColor: Colors.grey[800],
           hintText: 'Type your message...',
           hintStyle: const TextStyle(color: Colors.purple),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+          contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
           suffixIcon: IconButton(
             icon: const Icon(Icons.attach_file, color: Colors.white),
             onPressed: () {
@@ -93,10 +88,7 @@ class _HomePageState extends State<Chatbot> {
             },
           ),
         ),
-        inputTextStyle: const TextStyle(
-          color: Colors.white,
-          fontSize: 16.0,
-        ),
+        inputTextStyle: const TextStyle(color: Colors.white, fontSize: 16.0),
         sendButtonBuilder: (VoidCallback onSend) {
           return IconButton(
             icon: const Icon(Icons.send, color: Colors.purple),
@@ -126,7 +118,7 @@ class _HomePageState extends State<Chatbot> {
               backgroundImage:
                   user.profileImage != null && user.profileImage!.isNotEmpty
                       ? AssetImage(user.profileImage!)
-                      : const AssetImage('google-gemini.png'),
+                      : const AssetImage('assets/google-gemini.png'),
               radius: 16,
             ),
           );
@@ -182,7 +174,7 @@ class _HomePageState extends State<Chatbot> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _sendMediaMessage(file, descriptionController.text);
+                _sendImageMessage(file, descriptionController.text);
               },
               child: const Text(
                 "Send",
@@ -199,11 +191,22 @@ class _HomePageState extends State<Chatbot> {
     );
   }
 
-  void _sendMediaMessage(XFile file, String description) {
+  Future<void> _sendImageMessage(XFile file, String description) async {
+  try {
+    // قراءة الملف كبايتات
+    final bytes = await File(file.path).readAsBytes();
+    
+    // تحويل إلى base64 - مع التأكد من عدم وجود أسطر جديدة
+    final base64Image = base64Encode(bytes).replaceAll('\n', '');
+    
+    String displayText = description.isEmpty 
+        ? "📷 صورة مرفقة" 
+        : description;
+
     ChatMessage chatMessage = ChatMessage(
       user: currentUser,
       createdAt: DateTime.now(),
-      text: description,
+      text: displayText,
       medias: [
         ChatMedia(
           url: file.path,
@@ -212,10 +215,61 @@ class _HomePageState extends State<Chatbot> {
         )
       ],
     );
-    _sendMessage(chatMessage);
+
+    setState(() {
+      messages = [chatMessage, ...messages];
+    });
+    
+    _sendMessageWithImage(base64Image, description);
+  } catch (e) {
+    print("Error preparing image: $e");
+    setState(() {
+      messages = [
+        ChatMessage(user: geminiUser, createdAt: DateTime.now(), text: "⚠️ خطأ أثناء تحضير الصورة!"),
+        ...messages,
+      ];
+    });
+  }
+}
+
+  Future<void> _sendMessageWithImage(String base64Image, String description) async {
+    ChatMessage typingIndicator = ChatMessage(
+      user: geminiUser,
+      createdAt: DateTime.now(),
+      text: '...',
+    );
+
+    setState(() {
+      messages = [typingIndicator, ...messages];
+    });
+
+    try {
+      String prompt = description.isEmpty 
+          ? "وصف هذه الصورة بالتفصيل" 
+          : "وصف هذه الصورة: $description";
+          
+      String response = await fetchGeminiImageResponse(base64Image, prompt);
+
+      setState(() {
+        messages.removeWhere((msg) => msg.text == '...');
+        messages = [
+          ChatMessage(user: geminiUser, createdAt: DateTime.now(), text: response),
+          ...messages,
+        ];
+      });
+    } catch (e) {
+      print("Error with image: $e");
+      setState(() {
+        messages.removeWhere((msg) => msg.text == '...');
+        messages = [
+          ChatMessage(user: geminiUser, createdAt: DateTime.now(), text: "⚠️ خطأ أثناء تحليل الصورة!"),
+          ...messages,
+        ];
+      });
+    }
   }
 
-  void _sendMessage(ChatMessage chatMessage) {
+  Future<void> _sendMessage(ChatMessage chatMessage) async {
     setState(() {
       messages = [chatMessage, ...messages];
     });
@@ -231,36 +285,23 @@ class _HomePageState extends State<Chatbot> {
     });
 
     try {
-      String question = chatMessage.text;
-      List<Uint8List>? images;
-      if (chatMessage.medias?.isNotEmpty ?? false) {
-        images = [
-          File(chatMessage.medias!.first.url).readAsBytesSync(),
+      String response = await fetchGeminiResponse(chatMessage.text);
+
+      setState(() {
+        messages.removeWhere((msg) => msg.text == '...');
+        messages = [
+          ChatMessage(user: geminiUser, createdAt: DateTime.now(), text: response),
+          ...messages,
         ];
-      }
-
-      gemini.streamGenerateContent(question, images: images).listen((event) {
-        String response = event.content?.parts?.fold(
-                "", (previous, current) => "$previous ${current.text}") ??
-            "";
-
-        setState(() {
-          messages.removeWhere((msg) => msg.text == '...');
-          messages = [
-            ChatMessage(
-              user: geminiUser,
-              createdAt: DateTime.now(),
-              text: response,
-            ),
-            ...messages,
-          ];
-        });
       });
     } catch (e) {
-      // Handle error
+      setState(() {
+        messages.removeWhere((msg) => msg.text == '...');
+        messages = [
+          ChatMessage(user: geminiUser, createdAt: DateTime.now(), text: "⚠️ حدث خطأ أثناء جلب الإجابة!"),
+          ...messages,
+        ];
+      });
     }
   }
 }
-
-
-

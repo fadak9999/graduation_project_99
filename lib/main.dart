@@ -19,7 +19,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Gemini.init(apiKey: gemini_Api_Key);
+  Gemini.init(apiKey: geminiApiKey);
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String localeCode = prefs.getString('locale') ?? 'en';
@@ -102,5 +102,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
