@@ -55,10 +55,10 @@ class S {
     );
   }
 
-  /// `Text To Image`
+  /// `Image To Text`
   String get text_to_imag {
     return Intl.message(
-      'Text To Image',
+      'Image To Text',
       name: 'text_to_imag',
       desc: '',
       args: [],

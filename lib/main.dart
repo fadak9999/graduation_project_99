@@ -3,7 +3,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
+//import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -11,15 +11,15 @@ import 'package:graduation_project_99/Firebase__/login.dart';
 import 'package:graduation_project_99/generated/l10n.dart';
 import 'package:graduation_project_99/mod/ModeProvider.dart';
 import 'package:graduation_project_99/mod/ModeTheme.dart';
-import 'package:graduation_project_99/pages/Sections/Chat_bot/API.dart';
+//import 'package:graduation_project_99/pages/Sections/Chat_bot/API.dart';
 import 'package:graduation_project_99/pages/splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async {
+void main() async {print('');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Gemini.init(apiKey: gemini_Api_Key);
+ // Gemini.init(apiKey: gemini_Api_Key);
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String localeCode = prefs.getString('locale') ?? 'en';

@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "speech_not_initialized" : MessageLookupByLibrary.simpleMessage("Speech recognition is not initialized properly."),
     "speech_to_text" : MessageLookupByLibrary.simpleMessage("Speech To Text"),
     "speech_will_appear_here" : MessageLookupByLibrary.simpleMessage("Your speech will appear here..."),
-    "text_to_imag" : MessageLookupByLibrary.simpleMessage("Text To Image"),
+    "text_to_imag" : MessageLookupByLibrary.simpleMessage("Image To Text"),
     "text_to_speech" : MessageLookupByLibrary.simpleMessage("Text To Speech"),
     "titllehome" : MessageLookupByLibrary.simpleMessage("Sections")
   };
