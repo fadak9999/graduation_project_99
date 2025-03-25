@@ -111,8 +111,8 @@ class _IntroductionState extends State<Introduction> {
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromARGB(255, 109, 2, 197),
-            Color.fromARGB(255, 37, 0, 67),
+               Color.fromARGB(255, 154, 53, 255),
+            Color.fromARGB(255, 54, 0, 109),
           ],
           begin: Alignment.centerRight,
           end: Alignment.centerLeft,
@@ -149,7 +149,7 @@ class _IntroductionState extends State<Introduction> {
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromARGB(255, 109, 2, 197),
+           Color.fromARGB(255, 109, 2, 197),
             Color.fromARGB(255, 37, 0, 67),
           ],
           begin: Alignment.centerRight,

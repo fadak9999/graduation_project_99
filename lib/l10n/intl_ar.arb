@@ -20,7 +20,18 @@
 , "speech_will_appear_here": "سيظهر النص المنطوق هنا..."
 ,  "listening_now": "يتم الاستماع الآن..."
 ,
-"microphone_permission_required": "يجب السماح باستخدام الميكروفون لاستخدام هذه الميزة."
+"microphone_permission_required": "يجب السماح باستخدام الميكروفون لاستخدام هذه الميزة.",
+
+"Cancel":"الغاء",
+
+"chatbot_title": "دردشة جمني",
+"type_message_hint": "اكتب رسالتك...",
+"enter_description": "أدخل وصفًا للصورة",
+"send": "إرسال",
+"image_attached": "اكتب الوصف هنا..."
+
+
+
 
 
 }

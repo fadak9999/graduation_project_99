@@ -21,7 +21,14 @@
 "microphone_permission_required": "Microphone permission is required to use this feature.",
 "speech_not_initialized": "Speech recognition is not initialized properly.",
 "speech_will_appear_here": "Your speech will appear here...",
-"listening_now": "Listening now..."
+"listening_now": "Listening now...",
+
+"chatbot_title":"Gemini Chat",
+"type_message_hint":"Type your message...",
+"enter_description":"Enter a description for the image",
+"send":"send",
+"image_attached":"Write the description here...",
+"Cancel":"Cancel"
 
 
 

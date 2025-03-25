@@ -174,6 +174,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Gemini Chat`
+  String get chatbot_title {
+    return Intl.message(
+      'Gemini Chat',
+      name: 'chatbot_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your message...`
+  String get type_message_hint {
+    return Intl.message(
+      'Type your message...',
+      name: 'type_message_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a description for the image`
+  String get enter_description {
+    return Intl.message(
+      'Enter a description for the image',
+      name: 'enter_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `send`
+  String get send {
+    return Intl.message(
+      'send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write the description here...`
+  String get image_attached {
+    return Intl.message(
+      'Write the description here...',
+      name: 'image_attached',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get Cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'Cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  get write_description_hint => null;
+
+  get error_preparing_image => null;
+
+  get describe_image => null;
+
+  get error_analyzing_image => null;
+
+  get error_fetching_response => null;
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
