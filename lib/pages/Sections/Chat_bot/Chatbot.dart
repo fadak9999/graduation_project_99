@@ -968,7 +968,6 @@
 
 
 
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:dash_chat_2/dash_chat_2.dart';
@@ -1302,8 +1301,9 @@ class _HomePageState extends State<Chatbot> {
     } catch (e) {
       setState(() {
         messages.removeWhere((msg) => msg.text == '...');
+        var text = null;
         messages = [
-          ChatMessage(user: geminiUser, createdAt: DateTime.now(), text: S.of(context)!.error_fetching_response),  // Localized error message for fetching
+          ChatMessage(user: geminiUser, createdAt: DateTime.now(), text: text),  // Localized error message for fetching
           ...messages,
         ];
       });

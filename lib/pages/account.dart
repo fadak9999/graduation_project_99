@@ -385,6 +385,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:graduation_project_99/mod/ModeProvider.dart';
 import 'package:graduation_project_99/mod/features/mod/widgets/switch.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 
 class Account extends StatefulWidget {
   final Function(Locale) setLocale;
@@ -446,17 +448,38 @@ class _AccountState extends State<Account> {
     await prefs.setString('userName', name);
   }
 
-  Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    if (pickedFile != null) {
-      setState(() {
-        _profileImage = File(pickedFile.path);
-      });
-      await _saveProfileImage(pickedFile.path);
-    }
+
+
+Future<void> _pickImage() async {
+  final picker = ImagePicker();
+  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+  if (pickedFile != null) {
+    // نجيب مجلد دائم لتخزين الصورة
+    final appDir = await getApplicationDocumentsDirectory();
+    final fileName = path.basename(pickedFile.path);
+    final savedImage = await File(pickedFile.path).copy('${appDir.path}/$fileName');
+
+    setState(() {
+      _profileImage = savedImage;
+    });
+
+    await _saveProfileImage(savedImage.path);
   }
+}
+
+  // Future<void> _pickImage() async {
+  //   final picker = ImagePicker();
+  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+  //   if (pickedFile != null) {
+  //     setState(() {
+  //       _profileImage = File(pickedFile.path);
+  //     });
+  //     await _saveProfileImage(pickedFile.path);
+  //   }
+  // }
 
   Future<void> _changeLanguage(Locale locale) async {
     setState(() {

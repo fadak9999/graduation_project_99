@@ -20,6 +20,8 @@ class S {
   static const AppLocalizationDelegate delegate =
     AppLocalizationDelegate();
 
+  var error_fetching_response;
+
   static Future<S> load(Locale locale) {
     final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
     final localeName = Intl.canonicalizedLocale(name); 
@@ -235,15 +237,13 @@ class S {
     );
   }
 
-  get write_description_hint => null;
-
-  get error_preparing_image => null;
+  get error_analyzing_image => null;
 
   get describe_image => null;
 
-  get error_analyzing_image => null;
+  get error_preparing_image => null;
 
-  get error_fetching_response => null;
+  get write_description_hint => null;
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
